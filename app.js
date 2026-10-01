@@ -712,153 +712,27 @@ function paintPlaque(index) {
   const root = $("[data-showroom]")
   if (!root) return
   const looks = [...root.querySelectorAll("[data-look]")]
-  const look = looks[index]
-  if (!look) return
-  const L = lang()
-  const title = $("[data-plaque-title]")
-  const note = $("[data-plaque-note]")
-  const mark = $("[data-plaque-index]")
-  if (title) title.textContent = look.dataset[L === "hi" ? "titleHi" : "titleEn"]
-  if (note) note.textContent = look.dataset[L === "hi" ? "hi" : "en"]
-  if (mark) mark.textContent = String(index + 1).padStart(2, "0")
-  root.dataset.index = String(index)
-  root.querySelectorAll("[data-chapter]").forEach((button, buttonIndex) => {
-    button.classList.toggle("is-on", buttonIndex === index)
-  })
+  if (!looks.length) return
+  const next = Math.max(0, Math.min(looks.length - 1, index))
+  root.dataset.index = String(next)
+  looks.forEach((look, lookIndex) => look.classList.toggle("is-on", lookIndex === next))
 }
 
 function mountShowroom() {
   const root = $("[data-showroom]")
   if (!root) return
-  const canvas = root.querySelector("canvas")
-  const ctx = canvas.getContext("2d", { alpha: true })
   const looks = [...root.querySelectorAll("[data-look]")]
-  const reflects = [...root.querySelectorAll("[data-reflect]")]
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  const motes = Array.from({ length: 42 }, () => ({
-    a: Math.random() * Math.PI * 2,
-    r: 0.08 + Math.random() * 0.5,
-    s: 0.25 + Math.random() * 0.9,
-    o: 0.2 + Math.random() * 0.7,
-    w: 0.6 + Math.random() * 1.8,
-  }))
-  let progress = 0
-  let pointer = 0.5
-  let running = false
-  let lastIndex = -1
-
-  function resize() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.6)
-    const width = canvas.clientWidth || 1
-    const height = canvas.clientHeight || 1
-    canvas.width = Math.round(width * dpr)
-    canvas.height = Math.round(height * dpr)
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-  }
-
-  function draw(now) {
-    const width = canvas.clientWidth
-    const height = canvas.clientHeight
-    ctx.clearRect(0, 0, width, height)
-    const spotX = width * (0.22 + progress * 0.56 + (pointer - 0.5) * 0.08)
-    const floor = ctx.createLinearGradient(0, height * 0.62, 0, height)
-    floor.addColorStop(0, "rgba(231,201,138,0)")
-    floor.addColorStop(1, "rgba(231,201,138,0.08)")
-    ctx.fillStyle = floor
-    ctx.fillRect(0, height * 0.62, width, height * 0.38)
-
-    const vanishX = width * (0.5 + (pointer - 0.5) * 0.12)
-    const vanishY = height * 0.58
-    ctx.beginPath()
-    for (let i = 0; i <= 12; i += 1) {
-      ctx.moveTo(vanishX, vanishY)
-      ctx.lineTo((width / 12) * i, height)
-    }
-    for (let i = 1; i <= 7; i += 1) {
-      const y = vanishY + (height - vanishY) * (i / 7) ** 1.35
-      const spread = ((y - vanishY) / (height - vanishY)) * width * 0.72
-      ctx.moveTo(vanishX - spread, y)
-      ctx.lineTo(vanishX + spread, y)
-    }
-    ctx.strokeStyle = "rgba(231,201,138,0.22)"
-    ctx.lineWidth = 1
-    ctx.stroke()
-
-    const glow = ctx.createRadialGradient(spotX, height * 0.34, 10, spotX, height * 0.4, width * 0.42)
-    glow.addColorStop(0, "rgba(255, 244, 224, 0.34)")
-    glow.addColorStop(0.35, "rgba(231, 183, 170, 0.1)")
-    glow.addColorStop(1, "rgba(0,0,0,0)")
-    ctx.fillStyle = glow
-    ctx.fillRect(0, 0, width, height)
-
-    const time = now / 1000
-    motes.forEach((mote) => {
-      const angle = mote.a + time * 0.18 * mote.s
-      const x = spotX + Math.cos(angle) * mote.r * width * 0.2
-      const y = height * 0.38 + Math.sin(angle * 1.4 + mote.w) * mote.r * height * 0.16
-      ctx.beginPath()
-      ctx.fillStyle = `rgba(246,228,194,${0.12 + mote.o * 0.5})`
-      ctx.arc(x, y, mote.w, 0, Math.PI * 2)
-      ctx.fill()
-    })
-  }
-
-  function apply(indexFloat) {
-    const index = Math.max(0, Math.min(looks.length - 1, Math.round(indexFloat)))
-    looks.forEach((look, lookIndex) => {
-      const distance = Math.abs(indexFloat - lookIndex)
-      look.style.opacity = String(Math.max(0, 1 - distance * 1.25))
-      look.style.transform = `translate3d(${(lookIndex - indexFloat) * 10}%, 0, 0) scale(${1 - Math.min(distance, 1) * 0.05})`
-      look.classList.toggle("is-on", lookIndex === index)
-    })
-    reflects.forEach((image, imageIndex) => {
-      const distance = Math.abs(indexFloat - imageIndex)
-      image.style.opacity = String(Math.max(0, 0.85 - distance * 1.2))
-    })
-    if (index !== lastIndex) {
-      lastIndex = index
-      paintPlaque(index)
-    }
-  }
-
-  function frame(now) {
-    if (!running) return
-    const rect = root.getBoundingClientRect()
-    const scrollable = Math.max(1, root.offsetHeight - window.innerHeight)
-    const target = Math.min(1, Math.max(0, -rect.top / scrollable))
-    progress += (target - progress) * 0.14
-    draw(now)
-    apply(progress * (looks.length - 1))
-    requestAnimationFrame(frame)
-  }
-
-  function goTo(index) {
-    const sticky = root.querySelector(".showroom-sticky")
-    const top = root.offsetTop + (index / Math.max(1, looks.length - 1)) * (root.offsetHeight - window.innerHeight)
-    window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" })
-  }
-
-  resize()
-  window.addEventListener("resize", resize)
-  root.querySelectorAll("[data-chapter]").forEach((button) => {
-    button.addEventListener("click", () => goTo(Number(button.dataset.chapter)))
+  looks.forEach((look, index) => {
+    look.addEventListener("pointerenter", () => paintPlaque(index))
+    look.addEventListener("focus", () => paintPlaque(index))
   })
-  root.addEventListener("pointermove", (event) => {
-    const rect = root.getBoundingClientRect()
-    pointer = (event.clientX - rect.left) / rect.width
-  })
-
-  if (reduce) {
-    apply(0)
-    paintPlaque(0)
-    return
-  }
-  const observer = new IntersectionObserver((entries) => {
-    running = entries.some((entry) => entry.isIntersecting)
-    if (running) requestAnimationFrame(frame)
-  }, { rootMargin: "200px" })
-  observer.observe(root)
-  apply(0)
+  paintPlaque(currentLook())
+  if (reduce || looks.length < 2) return
+  window.setInterval(() => {
+    if (document.hidden || root.matches(":hover") || root.contains(document.activeElement)) return
+    paintPlaque((currentLook() + 1) % looks.length)
+  }, 4600)
 }
 
 function mountDust() {

@@ -167,50 +167,70 @@
       </div>
 
       <section class="showroom" id="showroom" data-showroom>
-        <div class="showroom-sticky">
-          <canvas class="room-canvas" aria-hidden="true"></canvas>
-          <div class="showroom-copy">
-            <p class="index">01</p>
+        <div class="showroom-head">
+          <p class="index">01</p>
+          <div>
             <h2>
-              <span class="t-hi">एक कक्ष। तीन रूप।</span>
-              <span class="t-en">One room. Three looks.</span>
+              <span class="t-hi">तीन रूप, एक नज़र में</span>
+              <span class="t-en">Three looks, at a glance</span>
             </h2>
             <p>
-              <span class="t-hi">स्क्रॉल कीजिए। प्रकाश रूप के साथ चलता है।</span>
-              <span class="t-en">Scroll. The light travels with the look.</span>
+              <span class="t-hi">रूप चुनें। सेवा, शुल्क और नियुक्ति ठीक नीचे हैं।</span>
+              <span class="t-en">Choose a look. Services, fees, and the appointment are just below.</span>
             </p>
           </div>
-          <div class="show-stage">
-            <div class="show-frame">
-              <figure data-look data-hi="सोना, मोगरा, सिंदूर" data-en="Gold, jasmine, vermillion" data-title-hi="ब्राइडल" data-title-en="Bridal">
-                <img src="assets/tanishq-look-bridal.jpg" alt="Gold bangles, jasmine, and a pot of vermillion on ivory silk." />
-              </figure>
-              <figure data-look data-hi="संध्या, शीशा, गुलाब" data-en="Evening, glass, roses" data-title-hi="संध्या" data-title-en="Evening">
-                <img src="assets/tanishq-look-party.jpg" alt="A crystal glass, rose petals, and a gold tube on burgundy silk." />
-              </figure>
-              <figure data-look data-hi="विवाह से पहले की त्वचा" data-en="Skin before the wedding" data-title-hi="आभा" data-title-en="Glow">
-                <img src="assets/tanishq-look-glow.jpg" alt="A bowl of cream, a pearl, and a pale rose in soft morning light." />
-              </figure>
-            </div>
-            <div class="show-reflect" aria-hidden="true">
-              <img src="assets/tanishq-look-bridal.jpg" alt="" data-reflect="0" />
-              <img src="assets/tanishq-look-party.jpg" alt="" data-reflect="1" />
-              <img src="assets/tanishq-look-glow.jpg" alt="" data-reflect="2" />
-            </div>
-            <div class="plinth-bar" aria-hidden="true"></div>
-            <div class="plaque">
-              <span data-plaque-index>01</span>
-              <div>
-                <strong data-plaque-title>ब्राइडल</strong>
-                <em data-plaque-note>सोना, मोगरा, सिंदूर</em>
-              </div>
-            </div>
-            <div class="chapters" data-chapters>
-              <button type="button" data-chapter="0">01</button>
-              <button type="button" data-chapter="1">02</button>
-              <button type="button" data-chapter="2">03</button>
-            </div>
+          <div class="showroom-actions">
+            <a class="btn btn-gold btn-small" href="#bridal">
+              <span class="t-hi">ब्राइडल रूप</span>
+              <span class="t-en">Bridal looks</span>
+            </a>
+            <a class="btn btn-glass btn-small" href="#salon">
+              <span class="t-hi">निश्चित शुल्क</span>
+              <span class="t-en">Fixed fees</span>
+            </a>
+            <a class="btn btn-glass btn-small" href="#book">
+              <span class="t-hi">नियुक्ति</span>
+              <span class="t-en">Appointment</span>
+            </a>
           </div>
+        </div>
+        <div class="look-grid">
+          <a class="look-card is-on" href="#bridal" data-look>
+            <img src="assets/tanishq-look-bridal.jpg" alt="Gold bangles, jasmine, and a pot of vermillion on ivory silk." />
+            <span class="look-meta">
+              <b>01</b>
+              <strong class="t-hi">ब्राइडल</strong>
+              <strong class="t-en">Bridal</strong>
+              <em class="t-hi">सोना, मोगरा, सिंदूर</em>
+              <em class="t-en">Gold, jasmine, vermillion</em>
+              <span class="look-go t-hi">रूप और परामर्श देखें</span>
+              <span class="look-go t-en">See the looks</span>
+            </span>
+          </a>
+          <a class="look-card" href="#salon" data-look>
+            <img src="assets/tanishq-look-party.jpg" alt="A crystal glass, rose petals, and a gold tube on burgundy silk." />
+            <span class="look-meta">
+              <b>02</b>
+              <strong class="t-hi">संध्या</strong>
+              <strong class="t-en">Evening</strong>
+              <em class="t-hi">पार्टी मेकअप और स्टाइल</em>
+              <em class="t-en">Party makeup and styling</em>
+              <span class="look-go t-hi">सैलून सूची देखें</span>
+              <span class="look-go t-en">See the salon list</span>
+            </span>
+          </a>
+          <a class="look-card" href="#salon" data-look>
+            <img src="assets/tanishq-look-glow.jpg" alt="A bowl of cream, a pearl, and a pale rose in soft morning light." />
+            <span class="look-meta">
+              <b>03</b>
+              <strong class="t-hi">आभा</strong>
+              <strong class="t-en">Glow</strong>
+              <em class="t-hi">त्वचा, वैक्स और सफाई</em>
+              <em class="t-en">Skin, waxing, and cleanup</em>
+              <span class="look-go t-hi">निश्चित शुल्क देखें</span>
+              <span class="look-go t-en">See the fixed fees</span>
+            </span>
+          </a>
         </div>
       </section>
 
