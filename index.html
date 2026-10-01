@@ -3,17 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tanishq Makeover Orai | Bridal makeup, Radha Palace ke saamne</title>
+    <title>Tanishq Makeover, Orai | Bridal makeup and salon</title>
     <meta
       name="description"
-      content="Tanishq Makeover, Orai — bridal, party aur glow makeup. Radha Palace ke saamne, Zilla Parishad Road. Appointment WhatsApp par, studio khud confirm karti hai."
+      content="Tanishq Makeover, Orai. Bridal looks and fixed-fee salon services, opposite Radha Palace on Zilla Parishad Road. Appointments are confirmed by the studio."
     />
     <meta name="theme-color" content="#11090d" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,520;0,9..144,640;1,9..144,520&family=Outfit:wght@340;460;560&family=Tiro+Devanagari+Hindi&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,520;0,9..144,640;1,9..144,520&family=Noto+Sans+Devanagari:wght@400;500;600&family=Outfit:wght@340;460;560&family=Tiro+Devanagari+Hindi&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -27,7 +27,7 @@
         "telephone": "+917355718075",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "In front of Radha Palace, Zilla Parishad Road",
+          "streetAddress": "Opposite Radha Palace, Zilla Parishad Road",
           "addressLocality": "Orai",
           "addressRegion": "Uttar Pradesh",
           "postalCode": "285001",
@@ -45,10 +45,13 @@
     </script>
   </head>
   <body>
-    <a class="skip" href="#main">
-      <span class="t-hi">Seedha booking par jaayein</span>
-      <span class="t-en">Skip to booking</span>
+    <a class="skip" href="#book">
+      <span class="t-hi">नियुक्ति पर जाएँ</span>
+      <span class="t-en">Skip to the appointment</span>
     </a>
+    <div class="curtain" aria-hidden="true"><span></span><span></span></div>
+    <div class="scroll-line" aria-hidden="true"></div>
+    <canvas class="dust" aria-hidden="true"></canvas>
     <div class="cursor-glow" aria-hidden="true"></div>
 
     <header class="nav" data-nav>
@@ -60,61 +63,66 @@
         </span>
       </a>
       <nav class="nav-links" aria-label="Sections">
-        <a href="#services"><span class="t-hi">Services</span><span class="t-en">Services</span></a>
-        <a href="#gallery"><span class="t-hi">Looks</span><span class="t-en">Looks</span></a>
-        <a href="#visit"><span class="t-hi">Studio</span><span class="t-en">Studio</span></a>
-        <a href="#book"><span class="t-hi">Book</span><span class="t-en">Book</span></a>
+        <a href="#showroom"><span class="t-hi">प्रदर्शन</span><span class="t-en">Showroom</span></a>
+        <a href="#bridal"><span class="t-hi">ब्राइडल</span><span class="t-en">Bridal</span></a>
+        <a href="#salon"><span class="t-hi">सैलून</span><span class="t-en">Salon</span></a>
+        <a href="#visit"><span class="t-hi">स्टूडियो</span><span class="t-en">Studio</span></a>
+        <a href="#book"><span class="t-hi">नियुक्ति</span><span class="t-en">Book</span></a>
       </nav>
       <div class="nav-actions">
         <button class="lang" type="button" data-lang-toggle aria-label="Language">
           <span data-lang-label>EN</span>
         </button>
         <a class="btn btn-gold btn-small" href="#book">
-          <span class="t-hi">Appointment</span>
+          <span class="t-hi">नियुक्ति</span>
           <span class="t-en">Appointment</span>
         </a>
         <button class="menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="sheet">
           <span></span><span></span>
-          <span class="sr-only t-hi">Menu</span>
+          <span class="sr-only t-hi">मेनू</span>
           <span class="sr-only t-en">Menu</span>
         </button>
       </div>
     </header>
 
     <div class="sheet" id="sheet" hidden>
-      <a href="#services" data-sheet-link><span class="t-hi">Services</span><span class="t-en">Services</span></a>
-      <a href="#gallery" data-sheet-link><span class="t-hi">Looks</span><span class="t-en">Looks</span></a>
-      <a href="#about" data-sheet-link><span class="t-hi">Studio ke baare mein</span><span class="t-en">About the studio</span></a>
-      <a href="#visit" data-sheet-link><span class="t-hi">Address</span><span class="t-en">Address</span></a>
-      <a href="#book" data-sheet-link><span class="t-hi">Appointment</span><span class="t-en">Appointment</span></a>
+      <a href="#showroom" data-sheet-link><span class="t-hi">प्रदर्शन-कक्ष</span><span class="t-en">Showroom</span></a>
+      <a href="#bridal" data-sheet-link><span class="t-hi">ब्राइडल रूप</span><span class="t-en">Bridal looks</span></a>
+      <a href="#salon" data-sheet-link><span class="t-hi">सैलून सेवाएँ</span><span class="t-en">Salon services</span></a>
+      <a href="#about" data-sheet-link><span class="t-hi">स्टूडियो</span><span class="t-en">The studio</span></a>
+      <a href="#visit" data-sheet-link><span class="t-hi">पता</span><span class="t-en">Address</span></a>
+      <a href="#book" data-sheet-link><span class="t-hi">नियुक्ति</span><span class="t-en">Appointment</span></a>
     </div>
 
     <main id="main">
       <section class="hero" id="top">
         <div class="hero-copy">
-          <p class="kicker">Orai · Radha Palace ke saamne</p>
-          <h1>
-            <span class="t-hi">Shaadi wala look, jo photo mein ruk jaaye.</span>
-            <span class="t-en">A wedding look that stays in the photograph.</span>
+          <p class="kicker">
+            <span class="t-hi">ओराई · राधा पैलेस के सामने</span>
+            <span class="t-en">Orai · Opposite Radha Palace</span>
+          </p>
+          <h1 class="rise">
+            <span class="t-hi">विवाह का रूप, जो चित्र में ठहर जाए।</span>
+            <span class="t-en">A wedding look that stays in the frame.</span>
           </h1>
           <p class="lede">
-            <span class="t-hi">Tanishq Makeover — bridal, party aur glow. Aap request bhejiye. Slot tab pakka hota hai jab studio WhatsApp par haan likhe.</span>
-            <span class="t-en">Tanishq Makeover does bridal, party, and glow. Send a request. The time is locked only when the studio says yes on WhatsApp.</span>
+            <span class="t-hi">Tanishq Makeover ब्राइडल रूप और दैनिक सौंदर्य सेवाएँ देता है। अनुरोध भेजें। समय तब निश्चित होता है जब स्टूडियो पुष्टि करे।</span>
+            <span class="t-en">Tanishq Makeover offers bridal looks and everyday beauty services. Send a request. The time is set when the studio confirms it.</span>
           </p>
           <div class="hero-cta">
-            <a class="btn btn-gold" href="#book">
-              <span class="t-hi">Look book karein</span>
-              <span class="t-en">Request a look</span>
+            <a class="btn btn-gold" href="#bridal">
+              <span class="t-hi">ब्राइडल रूप देखें</span>
+              <span class="t-en">View bridal looks</span>
             </a>
             <a class="btn btn-glass" href="tel:+917355718075">
-              <span class="t-hi">Call 73557 18075</span>
+              <span class="t-hi">कॉल 73557 18075</span>
               <span class="t-en">Call 73557 18075</span>
             </a>
           </div>
           <ul class="facts">
-            <li><strong>4.7</strong><span class="t-hi">Google rating</span><span class="t-en">Google rating</span></li>
-            <li><strong>93</strong><span class="t-hi">reviews</span><span class="t-en">reviews</span></li>
-            <li><strong>3.9K</strong><span class="t-hi">Facebook</span><span class="t-en">Facebook</span></li>
+            <li><strong>4.7</strong><span class="t-hi">गूगल रेटिंग</span><span class="t-en">Google rating</span></li>
+            <li><strong>93</strong><span class="t-hi">समीक्षाएँ</span><span class="t-en">reviews</span></li>
+            <li><strong>3.9K</strong><span class="t-hi">फेसबुक</span><span class="t-en">Facebook</span></li>
           </ul>
         </div>
 
@@ -144,7 +152,7 @@
             </p>
             <p class="float-card float-b">
               <b>Orai</b>
-              <span class="t-hi">Radha Palace</span>
+              <span class="t-hi">राधा पैलेस</span>
               <span class="t-en">Radha Palace</span>
             </p>
           </div>
@@ -153,102 +161,119 @@
 
       <div class="marquee" aria-hidden="true">
         <div class="marquee-track">
-          <p>Bridal makeup · Party · Glow · Engagement · Haldi · Mehndi · Photoshoot · Orai · Konch · Kalpi · Radha Palace ·</p>
-          <p>Bridal makeup · Party · Glow · Engagement · Haldi · Mehndi · Photoshoot · Orai · Konch · Kalpi · Radha Palace ·</p>
+          <p>Bridal · Engagement · Haldi · Mehndi · Sangeet · Reception · Trial · Salon · Orai · Konch · Kalpi ·</p>
+          <p>Bridal · Engagement · Haldi · Mehndi · Sangeet · Reception · Trial · Salon · Orai · Konch · Kalpi ·</p>
         </div>
       </div>
 
-      <section class="section" id="services">
-        <div class="section-head">
-          <p class="index">01</p>
-          <div>
+      <section class="showroom" id="showroom" data-showroom>
+        <div class="showroom-sticky">
+          <canvas class="room-canvas" aria-hidden="true"></canvas>
+          <div class="showroom-copy">
+            <p class="index">01</p>
             <h2>
-              <span class="t-hi">Kis din ke liye taiyar ho rahe hain?</span>
-              <span class="t-en">Which day are you getting ready for?</span>
+              <span class="t-hi">एक कक्ष। तीन रूप।</span>
+              <span class="t-en">One room. Three looks.</span>
             </h2>
             <p>
-              <span class="t-hi">Rate look aur din ke hisaab se studio batati hai. Yahan koi pakki keemat nahi likhi — taaki galat number na dikhe.</span>
-              <span class="t-en">The studio quotes after it knows the look and the day. No prices are printed here, so a wrong number never shows up.</span>
+              <span class="t-hi">स्क्रॉल कीजिए। प्रकाश रूप के साथ चलता है।</span>
+              <span class="t-en">Scroll. The light travels with the look.</span>
             </p>
           </div>
+          <div class="show-stage">
+            <div class="show-frame">
+              <figure data-look data-hi="सोना, मोगरा, सिंदूर" data-en="Gold, jasmine, vermillion" data-title-hi="ब्राइडल" data-title-en="Bridal">
+                <img src="assets/tanishq-look-bridal.jpg" alt="Gold bangles, jasmine, and a pot of vermillion on ivory silk." />
+              </figure>
+              <figure data-look data-hi="संध्या, शीशा, गुलाब" data-en="Evening, glass, roses" data-title-hi="संध्या" data-title-en="Evening">
+                <img src="assets/tanishq-look-party.jpg" alt="A crystal glass, rose petals, and a gold tube on burgundy silk." />
+              </figure>
+              <figure data-look data-hi="विवाह से पहले की त्वचा" data-en="Skin before the wedding" data-title-hi="आभा" data-title-en="Glow">
+                <img src="assets/tanishq-look-glow.jpg" alt="A bowl of cream, a pearl, and a pale rose in soft morning light." />
+              </figure>
+            </div>
+            <div class="show-reflect" aria-hidden="true">
+              <img src="assets/tanishq-look-bridal.jpg" alt="" data-reflect="0" />
+              <img src="assets/tanishq-look-party.jpg" alt="" data-reflect="1" />
+              <img src="assets/tanishq-look-glow.jpg" alt="" data-reflect="2" />
+            </div>
+            <div class="plinth-bar" aria-hidden="true"></div>
+            <div class="plaque">
+              <span data-plaque-index>01</span>
+              <div>
+                <strong data-plaque-title>ब्राइडल</strong>
+                <em data-plaque-note>सोना, मोगरा, सिंदूर</em>
+              </div>
+            </div>
+            <div class="chapters" data-chapters>
+              <button type="button" data-chapter="0">01</button>
+              <button type="button" data-chapter="1">02</button>
+              <button type="button" data-chapter="2">03</button>
+            </div>
+          </div>
         </div>
-        <div class="service-grid" id="service-grid"></div>
       </section>
 
-      <section class="section" id="gallery">
+      <section class="section" id="bridal">
         <div class="section-head">
           <p class="index">02</p>
           <div>
             <h2>
-              <span class="t-hi">Studio ka mood</span>
-              <span class="t-en">The mood of the studio</span>
+              <span class="t-hi">ब्राइडल रूप</span>
+              <span class="t-en">Bridal looks</span>
             </h2>
             <p>
-              <span class="t-hi">Yeh campaign stills hain, kisi client ki photo nahi. Asli bridal kaam unke Instagram par hai.</span>
-              <span class="t-en">These are campaign stills, not a client’s photograph. The real bridal work is on their Instagram.</span>
+              <span class="t-hi">हर समारोह का रूप अलग है। शुल्क परामर्श पर रहता है, क्योंकि दिन और काम दोनों देखकर ही दर कही जाती है।</span>
+              <span class="t-en">Each ceremony has its own look. The fee is given in consultation, after the day and the work are known.</span>
             </p>
           </div>
         </div>
-        <div class="gallery-grid">
-          <figure class="look">
-            <img src="assets/tanishq-look-bridal.jpg" alt="Gold bangles, jasmine, and a pot of vermillion on ivory silk." width="768" height="1024" />
-            <figcaption>
-              <span>01</span>
-              <h3><span class="t-hi">Bridal</span><span class="t-en">Bridal</span></h3>
-              <p><span class="t-hi">Sona, mogra, sindoor.</span><span class="t-en">Gold, jasmine, vermillion.</span></p>
-            </figcaption>
-          </figure>
-          <figure class="look">
-            <img src="assets/tanishq-look-party.jpg" alt="A crystal glass, rose petals, and a gold tube on burgundy silk." width="768" height="1024" />
-            <figcaption>
-              <span>02</span>
-              <h3><span class="t-hi">Party</span><span class="t-en">Party</span></h3>
-              <p><span class="t-hi">Shaam, sheesha, gulab.</span><span class="t-en">Evening, glass, roses.</span></p>
-            </figcaption>
-          </figure>
-          <figure class="look">
-            <img src="assets/tanishq-look-glow.jpg" alt="A bowl of cream, a pearl, and a pale rose in soft morning light." width="768" height="1024" />
-            <figcaption>
-              <span>03</span>
-              <h3><span class="t-hi">Glow</span><span class="t-en">Glow</span></h3>
-              <p><span class="t-hi">Shaadi se pehle ki skin.</span><span class="t-en">Skin before the wedding.</span></p>
-            </figcaption>
-          </figure>
+        <div class="bridal-list" id="bridal-list"></div>
+      </section>
+
+      <section class="section" id="salon">
+        <div class="section-head">
+          <p class="index">03</p>
+          <div>
+            <h2>
+              <span class="t-hi">निश्चित शुल्क</span>
+              <span class="t-en">Fixed fees</span>
+            </h2>
+            <p>
+              <span class="t-hi">ये दैनिक सैलून सेवाएँ हैं। दर स्टूडियो की निर्धारित सूची से है, ब्राइडल रूप से अलग।</span>
+              <span class="t-en">These are everyday salon services. The fees are the studio’s set list, separate from bridal looks.</span>
+            </p>
+          </div>
         </div>
-        <p class="gallery-link">
-          <a href="https://www.instagram.com/tanishqmakeoverorai/" target="_blank" rel="noopener noreferrer">
-            <span class="t-hi">Instagram par asli looks dekhein</span>
-            <span class="t-en">See the real looks on Instagram</span>
-          </a>
-        </p>
+        <div class="tariff" id="salon-list"></div>
       </section>
 
       <section class="section about" id="about">
         <div class="glass about-card">
-          <p class="index">03</p>
+          <p class="index">04</p>
           <h2>
-            <span class="t-hi">Orai ke beech, ek makeup studio.</span>
-            <span class="t-en">A makeup studio in the middle of Orai.</span>
+            <span class="t-hi">ओराई के मध्य, एक मेकअप स्टूडियो।</span>
+            <span class="t-en">A makeup studio in the centre of Orai.</span>
           </h2>
           <p>
-            <span class="t-hi">Radha Palace ke saamne, Zilla Parishad Road. Google par 4.7, 93 reviews. Facebook par lagbhag 3,900 log. Konch aur Kalpi se bhi dulhan yahan aati hain. Shoot alag se hota hai — unke posts par Vishal Photography ka naam hai.</span>
-            <span class="t-en">In front of Radha Palace, on Zilla Parishad Road. Google shows 4.7 from 93 reviews, and about 3,900 people follow the Facebook page. Brides also come from Konch and Kalpi. Shoots are separate — their posts name Vishal Photography.</span>
+            <span class="t-hi">राधा पैलेस के सामने, जिला परिषद रोड। गूगल पर 4.7, 93 समीक्षाएँ। फेसबुक पर लगभग 3,900 अनुयायी। कोंच और कालपी से भी दुल्हनें आती हैं।</span>
+            <span class="t-en">Opposite Radha Palace, on Zilla Parishad Road. Google shows 4.7 from 93 reviews, and about 3,900 people follow the Facebook page. Brides also come from Konch and Kalpi.</span>
           </p>
           <ol class="steps">
             <li>
               <b>1</b>
-              <span class="t-hi">Look chuniye</span>
-              <span class="t-en">Choose a look</span>
+              <span class="t-hi">रूप चुनें</span>
+              <span class="t-en">Choose the look</span>
             </li>
             <li>
               <b>2</b>
-              <span class="t-hi">Din aur naam bhejiye</span>
-              <span class="t-en">Send a day and your name</span>
+              <span class="t-hi">तिथि और नाम भेजें</span>
+              <span class="t-en">Send the date and your name</span>
             </li>
             <li>
               <b>3</b>
-              <span class="t-hi">Studio haan likhe, tab pakka</span>
-              <span class="t-en">It is booked when they say yes</span>
+              <span class="t-hi">पुष्टि के बाद समय निश्चित</span>
+              <span class="t-en">The time is set after confirmation</span>
             </li>
           </ol>
         </div>
@@ -256,62 +281,60 @@
 
       <section class="section" id="visit">
         <div class="section-head">
-          <p class="index">04</p>
+          <p class="index">05</p>
           <div>
             <h2>
-              <span class="t-hi">Studio yahan hai</span>
+              <span class="t-hi">स्टूडियो यहाँ है</span>
               <span class="t-en">The studio is here</span>
             </h2>
             <p>
-              <span class="t-hi">Appointment se aana. Pakka samay call ya WhatsApp par milta hai — hours yahan andaz se nahi likhe.</span>
-              <span class="t-en">Come by appointment. The exact hour is set on a call or WhatsApp — hours are not guessed on this page.</span>
+              <span class="t-hi">आगमन नियुक्ति से करें। निश्चित समय कॉल या व्हाट्सऐप पर मिलता है।</span>
+              <span class="t-en">Visits are by appointment. The exact hour is set by call or WhatsApp.</span>
             </p>
           </div>
         </div>
         <div class="visit-grid">
           <div class="glass visit-card">
             <h3>
-              <span class="t-hi">Address</span>
+              <span class="t-hi">पता</span>
               <span class="t-en">Address</span>
             </h3>
-            <p>
-              Tanishq Makeover (Makeup) Studio<br />
-              Bike Agency, Dhruv-Tara ke UP side,<br />
-              Radha Palace ke saamne,<br />
-              Zilla Parishad Road, Orai,<br />
-              Uttar Pradesh 285001
+            <p id="address-block">
+              Tanishq Makeover<br />
+              <span class="t-hi">बाइक एजेंसी, ध्रुव-तारा के उत्तर की ओर, राधा पैलेस के सामने, जिला परिषद रोड, ओराई, उत्तर प्रदेश 285001</span>
+              <span class="t-en">Bike Agency, north of Dhruv-Tara, opposite Radha Palace, Zilla Parishad Road, Orai, Uttar Pradesh 285001</span>
             </p>
             <ul class="phones">
               <li>
-                <a href="tel:+917355718075">73557 18075</a>
-                <span class="t-hi">Google listing · Call aur WhatsApp</span>
-                <span class="t-en">Google listing · Call and WhatsApp</span>
+                <a id="phone-main" href="tel:+917355718075">73557 18075</a>
+                <span class="t-hi">कॉल और व्हाट्सऐप</span>
+                <span class="t-en">Call and WhatsApp</span>
               </li>
               <li>
-                <a href="tel:+917080849084">70808 49084</a>
-                <span class="t-hi">Booking number, unke posts par</span>
-                <span class="t-en">Booking number, from their posts</span>
+                <a id="phone-booking" href="tel:+917080849084">70808 49084</a>
+                <span class="t-hi">बुकिंग नंबर</span>
+                <span class="t-en">Booking number</span>
               </li>
               <li>
-                <a href="tel:+919936575872">99365 75872</a>
-                <span class="t-hi">Doosra number, unke captions par</span>
-                <span class="t-en">Second number, from their captions</span>
+                <a id="phone-extra" href="tel:+919936575872">99365 75872</a>
+                <span class="t-hi">दूसरा नंबर</span>
+                <span class="t-en">Second number</span>
               </li>
             </ul>
             <div class="visit-actions">
               <a class="btn btn-gold" href="https://www.google.com/maps/dir/?api=1&destination=Radha+Palace+Zilla+Parishad+Road+Orai" target="_blank" rel="noopener noreferrer">
-                <span class="t-hi">Rasta dikhayein</span>
+                <span class="t-hi">मार्ग देखें</span>
                 <span class="t-en">Get directions</span>
               </a>
               <a class="btn btn-glass" href="https://www.google.com/search?q=TANISHQ+MAKEOVER+MAKEUP+STUDIO+ORAI" target="_blank" rel="noopener noreferrer">
-                <span class="t-hi">Google reviews</span>
+                <span class="t-hi">गूगल समीक्षाएँ</span>
                 <span class="t-en">Google reviews</span>
               </a>
             </div>
           </div>
           <div class="map-frame">
             <iframe
-              title="Tanishq Makeover, in front of Radha Palace, Orai"
+              title="Tanishq Makeover, opposite Radha Palace, Orai"
               src="https://maps.google.com/maps?q=Radha%20Palace%20Guesthouse%20Zilla%20Parishad%20Road%20Orai&z=16&output=embed"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
@@ -322,45 +345,55 @@
 
       <section class="section" id="book">
         <div class="section-head">
-          <p class="index">05</p>
+          <p class="index">06</p>
           <div>
             <h2>
-              <span class="t-hi">Appointment maangiye</span>
-              <span class="t-en">Ask for an appointment</span>
+              <span class="t-hi">नियुक्ति का अनुरोध</span>
+              <span class="t-en">Request an appointment</span>
             </h2>
             <p>
-              <span class="t-hi">Chaar chhote kadam. Aakhir mein WhatsApp khulega. Website card nahi kaatti, aur slot khud lock nahi karti.</span>
-              <span class="t-en">Four short steps. WhatsApp opens at the end. This page does not charge a card, and it does not lock a slot by itself.</span>
+              <span class="t-hi">ब्राइडल और सैलून अलग हैं। भरा हुआ समय चुनने में नहीं आएगा। व्हाट्सऐप अंत में खुलेगा।</span>
+              <span class="t-en">Bridal and salon are separate. A taken time cannot be chosen. WhatsApp opens at the end.</span>
             </p>
           </div>
         </div>
 
         <div class="glass book">
+          <div class="book-switch" role="tablist">
+            <button type="button" id="mode-bridal" role="tab">
+              <span class="t-hi">ब्राइडल नियुक्ति</span>
+              <span class="t-en">Bridal appointment</span>
+            </button>
+            <button type="button" id="mode-salon" role="tab">
+              <span class="t-hi">सैलून नियुक्ति</span>
+              <span class="t-en">Salon appointment</span>
+            </button>
+          </div>
           <ol class="rail" id="rail"></ol>
           <div id="wizard"></div>
           <p class="form-error" id="form-error" role="alert"></p>
           <div class="book-nav">
             <button class="btn btn-glass" type="button" id="back-btn">
-              <span class="t-hi">Peeche</span>
+              <span class="t-hi">पिछला</span>
               <span class="t-en">Back</span>
             </button>
             <button class="btn btn-gold" type="button" id="next-btn">
-              <span class="t-hi">Aage</span>
+              <span class="t-hi">अगला</span>
               <span class="t-en">Next</span>
             </button>
           </div>
           <div class="success" id="success" hidden tabindex="-1">
             <h3>
-              <span class="t-hi">WhatsApp khul gaya hona chahiye.</span>
-              <span class="t-en">WhatsApp should have opened.</span>
+              <span class="t-hi">अनुरोध दर्ज हो गया।</span>
+              <span class="t-en">The request has been recorded.</span>
             </h3>
             <p>
-              <span class="t-hi">Slot tabhi pakka hai jab studio reply mein haan likhe. Agar app nahi khula, neeche wala button dabayein.</span>
-              <span class="t-en">The slot is real only after the studio replies yes. If the app did not open, use the button below.</span>
+              <span class="t-hi">समय तब निश्चित है जब स्टूडियो व्हाट्सऐप पर पुष्टि करे। यदि संदेश नहीं खुला, नीचे का बटन दबाएँ।</span>
+              <span class="t-en">The time is fixed when the studio confirms it on WhatsApp. If the message did not open, use the button below.</span>
             </p>
             <a class="btn btn-gold" id="wa-fallback" href="https://wa.me/917355718075" target="_blank" rel="noopener noreferrer">WhatsApp</a>
             <button class="btn btn-glass" type="button" id="reset-btn">
-              <span class="t-hi">Nayi request</span>
+              <span class="t-hi">नया अनुरोध</span>
               <span class="t-en">New request</span>
             </button>
           </div>
@@ -374,26 +407,31 @@
         <p>Orai · 285001</p>
       </div>
       <p class="fine">
-        <span class="t-hi">Yeh Orai ka local makeup studio hai. Titan ke Tanishq jewellery brand se iska koi sambandh nahi. Udaipur wala Tanishq Makeover Studio bhi alag business hai.</span>
-        <span class="t-en">This is a local makeup studio in Orai. It is not Titan’s Tanishq jewellery brand, and it is not the Tanishq Makeover Studio in Udaipur.</span>
+        <span class="t-hi">राधा पैलेस के सामने, जिला परिषद रोड।</span>
+        <span class="t-en">Opposite Radha Palace, Zilla Parishad Road.</span>
       </p>
       <a href="https://www.instagram.com/tanishqmakeoverorai/" target="_blank" rel="noopener noreferrer">@tanishqmakeoverorai</a>
     </footer>
 
     <div class="dock">
       <a href="tel:+917355718075">
-        <span class="t-hi">Call</span>
+        <span class="t-hi">कॉल</span>
         <span class="t-en">Call</span>
       </a>
       <a href="#book">
-        <span class="t-hi">Book</span>
+        <span class="t-hi">नियुक्ति</span>
         <span class="t-en">Book</span>
       </a>
     </div>
 
     <noscript>
-      <p class="noscript">JavaScript band hai. Seedha call karein: 73557 18075.</p>
+      <p class="noscript">
+        <span class="t-hi">जावास्क्रिप्ट बंद है। सीधे कॉल करें: 73557 18075।</span>
+        <span class="t-en">JavaScript is off. Please call 73557 18075.</span>
+      </p>
     </noscript>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
+    <script src="config.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

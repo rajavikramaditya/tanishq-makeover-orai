@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Tanishq Makeover · Studio desk</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,520;1,9..144,520&family=Noto+Sans+Devanagari:wght@400;500;600&family=Outfit:wght@360;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <section class="gate" id="gate">
+      <form id="login-form" class="gate-card">
+        <p class="mark">Tanishq Makeover</p>
+        <h1 id="login-title">स्टूडियो डेस्क</h1>
+        <p id="login-hint">यह पृष्ठ ग्राहकों के लिए नहीं है।</p>
+        <label id="email-label">ईमेल
+          <input id="email" name="email" type="email" autocomplete="username" value="rajavikramaditya0@gmail.com" required />
+        </label>
+        <label id="password-label">कूटशब्द
+          <input id="password" name="password" type="password" autocomplete="current-password" required />
+        </label>
+        <p class="warn" id="login-error" role="alert"></p>
+        <button class="gold" type="submit" id="login-submit">प्रवेश</button>
+      </form>
+    </section>
+
+    <div id="desk" hidden>
+      <header class="top">
+        <div>
+          <strong>Tanishq</strong>
+          <small>Orai</small>
+        </div>
+        <div class="top-actions">
+          <button type="button" id="lang-btn" class="quiet">EN</button>
+          <button type="button" id="logout-btn" class="quiet"></button>
+        </div>
+      </header>
+      <nav class="tabs" id="tabs"></nav>
+      <main id="view"></main>
+    </div>
+    <p class="toast" id="toast" hidden></p>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
+    <script src="config.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>
