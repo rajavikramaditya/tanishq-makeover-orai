@@ -266,7 +266,7 @@ as $$
 declare
   new_id uuid;
   clean_name text := left(btrim(p_customer_name), 80);
-  clean_phone text := regexp_replace(coalesce(p_phone, ''), '\D', '', 'g');
+  clean_phone text := regexp_replace(coalesce(p_phone, ''), '[^0-9]', '', 'g');
   clean_note text := left(btrim(coalesce(p_note, '')), 280);
 begin
   if p_category not in ('bridal', 'salon') then
