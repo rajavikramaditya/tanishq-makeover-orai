@@ -321,8 +321,8 @@ function mountChrome() {
           </div>
           <ol class="route">
             <li><b>1</b><span><strong class="t-hi">हनुमान चबूतरा, ओराई पहुँचें</strong><strong class="t-en">Reach Hanuman Chabutara, Orai</strong><span class="t-hi">ऑटो/रिक्शा वाले को यही नाम बताएँ।</span><span class="t-en">Tell the auto driver this landmark.</span></span></li>
-            <li><b>2</b><span><strong class="t-hi">राजेन्द्र नगर की गली में आएँ</strong><strong class="t-en">Turn into the Rajendra Nagar lane</strong><span class="t-hi">“दिशा देखें” दबाएँ — मैप पिन तक ले जाएगा।</span><span class="t-en">Tap “Directions” — it leads to the pin.</span></span></li>
-            <li><b>✦</b><span><strong>Sparkle Makeover</strong><span class="t-hi">रास्ता न मिले तो कॉल करें — हम लाइव लोकेशन भेज देंगे।</span><span class="t-en">Lost? Call us — we will send a live location.</span></span></li>
+            <li><b>2</b><span><strong class="t-hi">गोस्वामी मंदिर वाली गली पकड़ें</strong><strong class="t-en">Take the lane towards Goshwami Mandir</strong><span class="t-hi">चबूतरा से Old Bypass Road की तरफ़ से उत्तर-पश्चिम, गोस्वामी मंदिर की दिशा में चलें।</span><span class="t-en">From the Chabutra, walk north-west towards Goshwami Mandir.</span></span></li>
+            <li><b>✦</b><span><strong>Sparkle Makeover</strong><span class="t-hi">लगभग 100 मीटर पर, गोस्वामी मंदिर से पहले। रास्ता न मिले तो कॉल करें — हम लाइव लोकेशन भेज देंगे।</span><span class="t-en">About 100 m in, before Goshwami Mandir. Lost? Call us — we will send a live location.</span></span></li>
           </ol>
           <p class="route-note" data-s="route-note" hidden><span class="t-hi" data-s="dir-hi"></span><span class="t-en" data-s="dir-en"></span></p>
           <div class="btn-row">

@@ -14,3 +14,9 @@ update public.studio_settings set
   directions_en = 'Reach Hanuman Chabutara and turn into the Rajendra Nagar lane. The map pin sits on the parlour itself. If you cannot find it, call or WhatsApp and we will send a live location.',
   updated_at = now()
 where id = 1;
+
+update public.studio_settings set
+  directions_hi = 'हनुमान चबूतरा से गोस्वामी मंदिर की ओर जाने वाली गली में लगभग 100 मीटर आएँ — Sparkle Makeover मंदिर से पहले है। रास्ता न मिले तो कॉल या WhatsApp करें, हम लाइव लोकेशन भेज देंगे।',
+  directions_en = 'From Hanuman Chabutra take the lane towards Goshwami Mandir for about 100 m — Sparkle Makeover comes before the temple. If you cannot find it, call or WhatsApp and we will send a live location.',
+  updated_at = now()
+where id = 1;
