@@ -339,7 +339,7 @@ function mountChrome() {
     </section>
     <footer class="footer">
       <div class="footer-inner">
-        <a class="foot-logo" href="index.html"><img src="assets/logo-full.jpg?v=20261009d" alt="Sparkle Makeover and Beauty Salon" width="240" height="240" loading="lazy" /></a>
+        <a class="foot-logo" href="index.html"><img src="assets/logo-full.jpg?v=20261009e" alt="Sparkle Makeover and Beauty Salon" width="240" height="240" loading="lazy" /></a>
         <nav class="foot-links" aria-label="Footer">
           <a href="packages.html"><span class="t-hi">ब्राइडल पैकेज</span><span class="t-en">Bridal packages</span></a>
           <a href="lehenga.html"><span class="t-hi">लहंगा</span><span class="t-en">Lehenga</span></a>
