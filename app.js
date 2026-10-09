@@ -5,9 +5,35 @@ const FALLBACK_SETTINGS = {
   phone_extra: "8081817807",
   email: "sparklemakeover21@gmail.com",
   facebook: "https://facebook.com/101835146093091",
-  instagram: "https://facebook.com/101835146093091",
+  instagram: "https://www.instagram.com/spar.klemakeover/",
   hours_hi: "सुबह 11 – रात 8 · सभी दिन",
   hours_en: "11 AM – 8 PM · All days",
+  address_hi: "हनुमान चबूतरा के पास, राजेन्द्र नगर, ओराई, उत्तर प्रदेश 285001",
+  address_en: "Near Hanuman Chabutara, Rajendra Nagar, Orai, Uttar Pradesh 285001",
+  directions_hi: "",
+  directions_en: "",
+  map_lat: 25.990364,
+  map_lng: 79.465031,
+}
+
+const LOOK_IMAGES = [
+  "assets/tanishq-look-bridal.jpg",
+  "assets/tanishq-look-glow.jpg",
+  "assets/tanishq-look-party.jpg",
+  "assets/tanishq-hero-vanity.jpg",
+]
+
+const ICONS = {
+  wa: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.4c.3-.5.6-.5.9-.5h.6c.2 0 .5 0 .7.5l.9 2.1c.1.3.1.5-.1.7l-.6.7c-.2.2-.2.4-.1.6a6.6 6.6 0 0 0 2.8 2.7c.2.1.4.1.6-.1l.7-.8c.2-.2.4-.3.7-.2l2 .9c.4.2.5.4.5.6 0 .8-.4 1.6-1 2-.7.5-1.6.6-2.5.3a10 10 0 0 1-6.6-6.5c-.3-.9-.2-2.1.5-3z" fill="currentColor"/></svg>',
+  ig: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.2" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"/></svg>',
+  fb: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.6 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.9v3h2.6V21z" fill="currentColor"/></svg>',
+  call: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5h2.6l1.4 4.1-1.9 1.3a12 12 0 0 0 6.4 6.4l1.3-1.9 4.1 1.4v2.6c0 1-.8 1.9-1.9 1.9A16.6 16.6 0 0 1 4.7 5.4c0-1.1.9-1.9 1.9-1.9z" fill="currentColor"/></svg>',
+  pin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5a7 7 0 0 0-7 7c0 5 7 12 7 12s7-7 7-12a7 7 0 0 0-7-7zm0 9.6a2.6 2.6 0 1 1 0-5.2 2.6 2.6 0 0 1 0 5.2z" fill="currentColor"/></svg>',
+  clock: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.6" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M12 7.2V12l3.2 2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+  mail: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.9"/></svg>',
+  play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>',
+  route: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6 21.4 12 12 21.4 2.6 12z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M9 14v-2.5h5.5M12.5 9.2l2 2.3-2 2.3" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  book: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="3" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
 }
 
 const FALLBACK_SLOTS = [
@@ -238,8 +264,222 @@ function applyLang(next) {
   document.documentElement.lang = next
   const label = $("[data-lang-label]")
   if (label) label.textContent = next === "hi" ? "EN" : "HI"
-  try { localStorage.setItem("tanishq-lang", next) } catch { /* ignore */ }
+  try { localStorage.setItem("sparkle-lang", next) } catch { /* ignore */ }
   renderAll()
+}
+
+function fillIcons(root = document) {
+  root.querySelectorAll("[data-icon]").forEach((node) => {
+    if (!node.firstElementChild && ICONS[node.dataset.icon]) node.innerHTML = ICONS[node.dataset.icon]
+  })
+}
+
+function waDigits() {
+  return String(state.settings.whatsapp || "918081817807").replace(/\D/g, "")
+}
+function localPhone() {
+  return String(state.settings.phone_main || "8081817807").replace(/\D/g, "").replace(/^91/, "")
+}
+function waHello() {
+  const text = lang() === "hi"
+    ? "नमस्ते, Sparkle Makeover। मुझे ब्राइडल पैकेज / लहंगा के बारे में जानकारी चाहिए।"
+    : "Hello Sparkle Makeover. I would like to know about a bridal package / lehenga."
+  return `https://wa.me/${waDigits()}?text=${encodeURIComponent(text)}`
+}
+function waRoute() {
+  const text = lang() === "hi"
+    ? "नमस्ते, Sparkle Makeover। कृपया पार्लर की लाइव लोकेशन भेज दें।"
+    : "Hello Sparkle Makeover. Please send the parlour’s live location."
+  return `https://wa.me/${waDigits()}?text=${encodeURIComponent(text)}`
+}
+function pinCoords() {
+  const lat = Number(state.settings.map_lat) || FALLBACK_SETTINGS.map_lat
+  const lng = Number(state.settings.map_lng) || FALLBACK_SETTINGS.map_lng
+  return `${lat},${lng}`
+}
+
+function mountChrome() {
+  const end = $("#site-end")
+  if (!end) return
+  end.className = "site-end"
+  end.innerHTML = `
+    <section class="visit" id="visit" aria-labelledby="visit-title">
+      <div class="section-head reveal">
+        <span class="script">Visit us</span>
+        <h2 id="visit-title"><span class="t-hi">पार्लर तक कैसे पहुँचें</span><span class="t-en">How to reach the parlour</span></h2>
+        <span class="ornament"><i></i></span>
+        <p><span class="t-hi">पार्लर राजेन्द्र नगर की गली के अंदर है — मैप का पिन सीधे Sparkle पर लगा है।</span><span class="t-en">The parlour is inside a Rajendra Nagar lane — the map pin sits right on Sparkle.</span></p>
+      </div>
+      <div class="visit-grid">
+        <div class="map-wrap reveal">
+          <iframe data-map title="Sparkle Makeover and Beauty Salon on the map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <p class="map-pin"><img src="assets/logo.svg" alt="" width="30" height="30" /><span class="t-hi">Sparkle Makeover यहाँ है</span><span class="t-en">Sparkle Makeover is here</span></p>
+        </div>
+        <div class="visit-card reveal">
+          <div>
+            <h3>Sparkle Makeover <span class="t-hi">और ब्यूटी सैलून</span><span class="t-en">and Beauty Salon</span></h3>
+            <p class="addr"><span class="t-hi" data-s="addr-hi"></span><span class="t-en" data-s="addr-en"></span></p>
+          </div>
+          <ol class="route">
+            <li><b>1</b><span><strong class="t-hi">हनुमान चबूतरा, ओराई पहुँचें</strong><strong class="t-en">Reach Hanuman Chabutara, Orai</strong><span class="t-hi">ऑटो/रिक्शा वाले को यही नाम बताएँ।</span><span class="t-en">Tell the auto driver this landmark.</span></span></li>
+            <li><b>2</b><span><strong class="t-hi">राजेन्द्र नगर की गली में आएँ</strong><strong class="t-en">Turn into the Rajendra Nagar lane</strong><span class="t-hi">“दिशा देखें” दबाएँ — मैप पिन तक ले जाएगा।</span><span class="t-en">Tap “Directions” — it leads to the pin.</span></span></li>
+            <li><b>✦</b><span><strong>Sparkle Makeover</strong><span class="t-hi">रास्ता न मिले तो कॉल करें — हम लाइव लोकेशन भेज देंगे।</span><span class="t-en">Lost? Call us — we will send a live location.</span></span></li>
+          </ol>
+          <p class="route-note" data-s="route-note" hidden><span class="t-hi" data-s="dir-hi"></span><span class="t-en" data-s="dir-en"></span></p>
+          <div class="btn-row">
+            <a class="btn btn-gold" data-s="dir" target="_blank" rel="noopener"><span class="ico" data-icon="route"></span><span class="t-hi">दिशा देखें</span><span class="t-en">Directions</span></a>
+            <a class="btn btn-wa" data-s="wa-route" target="_blank" rel="noopener"><span class="ico" data-icon="wa"></span><span class="t-hi">लोकेशन माँगें</span><span class="t-en">Ask location</span></a>
+          </div>
+          <ul class="contact-list">
+            <li><a data-s="tel"><span class="ico" data-icon="call"></span><span data-s="phone-text"></span></a></li>
+            <li><span><span class="ico" data-icon="clock"></span><span class="t-hi" data-s="hours-hi"></span><span class="t-en" data-s="hours-en"></span></span></li>
+            <li><a data-s="mail"><span class="ico" data-icon="mail"></span><span data-s="mail-text"></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="footer-inner">
+        <a class="brand" href="index.html"><img src="assets/logo.svg" alt="" width="42" height="42" /><span><strong>Sparkle</strong><small>Makeover · Orai</small></span></a>
+        <nav class="foot-links" aria-label="Footer">
+          <a href="packages.html"><span class="t-hi">ब्राइडल पैकेज</span><span class="t-en">Bridal packages</span></a>
+          <a href="lehenga.html"><span class="t-hi">लहंगा</span><span class="t-en">Lehenga</span></a>
+          <a href="book.html"><span class="t-hi">बुकिंग</span><span class="t-en">Booking</span></a>
+        </nav>
+        <div class="socials">
+          <a data-s="wa" target="_blank" rel="noopener" aria-label="WhatsApp"><span class="ico" data-icon="wa"></span></a>
+          <a data-s="ig" target="_blank" rel="noopener" aria-label="Instagram"><span class="ico" data-icon="ig"></span></a>
+          <a data-s="fb" target="_blank" rel="noopener" aria-label="Facebook"><span class="ico" data-icon="fb"></span></a>
+          <a data-s="tel" aria-label="Call"><span class="ico" data-icon="call"></span></a>
+        </div>
+        <p class="credit">Designed by <b>OrbitCore</b></p>
+        <a class="foot-login" href="admin.html"><span class="t-hi">स्टूडियो लॉगिन</span><span class="t-en">Studio login</span></a>
+      </div>
+    </footer>
+    <div class="fab">
+      <a class="fab-wa" data-s="wa" target="_blank" rel="noopener" aria-label="WhatsApp"><span class="ico" data-icon="wa"></span><span class="tip t-hi">WhatsApp पर बात करें</span><span class="tip t-en">Chat on WhatsApp</span></a>
+      <a class="fab-ig" data-s="ig" target="_blank" rel="noopener" aria-label="Instagram"><span class="ico" data-icon="ig"></span><span class="tip">@spar.klemakeover</span></a>
+    </div>
+    <nav class="dock" aria-label="Quick contact">
+      <a class="d-call" data-s="tel"><span class="ico" data-icon="call"></span><span class="t-hi">कॉल</span><span class="t-en">Call</span></a>
+      <a class="d-wa" data-s="wa" target="_blank" rel="noopener"><span class="ico" data-icon="wa"></span>WhatsApp</a>
+      <a class="d-ig" data-s="ig" target="_blank" rel="noopener"><span class="ico" data-icon="ig"></span>Instagram</a>
+      <a class="d-book" href="${$("#wizard") ? "#main" : "book.html"}"><span class="ico" data-icon="book"></span><span class="t-hi">बुक करें</span><span class="t-en">Book now</span></a>
+    </nav>
+  `
+}
+
+let mapSrc = ""
+function paintContact() {
+  const s = state.settings
+  const digits = localPhone()
+  const set = (key, fn) => document.querySelectorAll(`[data-s="${key}"]`).forEach(fn)
+  set("tel", (node) => { node.href = `tel:+91${digits}` })
+  set("phone-text", (node) => { node.textContent = `+91 ${prettyPhone(digits)}` })
+  set("wa", (node) => { node.href = waHello() })
+  set("wa-route", (node) => { node.href = waRoute() })
+  set("ig", (node) => { node.href = s.instagram || FALLBACK_SETTINGS.instagram })
+  set("fb", (node) => {
+    node.href = s.facebook || FALLBACK_SETTINGS.facebook
+  })
+  set("mail", (node) => { node.href = `mailto:${s.email || FALLBACK_SETTINGS.email}` })
+  set("mail-text", (node) => { node.textContent = s.email || FALLBACK_SETTINGS.email })
+  set("hours-hi", (node) => { node.textContent = s.hours_hi || FALLBACK_SETTINGS.hours_hi })
+  set("hours-en", (node) => { node.textContent = s.hours_en || FALLBACK_SETTINGS.hours_en })
+  set("addr-hi", (node) => { node.textContent = s.address_hi || FALLBACK_SETTINGS.address_hi })
+  set("addr-en", (node) => { node.textContent = s.address_en || FALLBACK_SETTINGS.address_en })
+  set("dir-hi", (node) => { node.textContent = s.directions_hi || "" })
+  set("dir-en", (node) => { node.textContent = s.directions_en || s.directions_hi || "" })
+  set("route-note", (node) => { node.hidden = !(s.directions_hi || s.directions_en) })
+  const coords = pinCoords()
+  set("dir", (node) => { node.href = `https://www.google.com/maps/dir/?api=1&destination=${coords}&travelmode=driving` })
+  const frame = $("[data-map]")
+  const nextSrc = `https://maps.google.com/maps?q=${coords}&z=18&hl=${lang()}&output=embed`
+  if (frame && mapSrc !== coords) {
+    mapSrc = coords
+    frame.src = nextSrc
+  }
+}
+
+let revealer = null
+function observeReveals() {
+  const nodes = document.querySelectorAll(".reveal:not(.is-in)")
+  if (!("IntersectionObserver" in window)) {
+    nodes.forEach((node) => node.classList.add("is-in"))
+    return
+  }
+  if (!revealer) {
+    revealer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-in")
+          revealer.unobserve(entry.target)
+        }
+      })
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 })
+  }
+  nodes.forEach((node) => revealer.observe(node))
+}
+
+function videoEmbed(url) {
+  const raw = String(url || "").trim()
+  const ig = raw.match(/instagram\.com\/(?:[\w.]+\/)?(reel|p|tv)\/([\w-]+)/)
+  if (ig) return { kind: "frame", src: `https://www.instagram.com/${ig[1]}/${ig[2]}/embed`, tall: true }
+  const yt = raw.match(/(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/)([\w-]{6,})/)
+  if (yt) return { kind: "frame", src: `https://www.youtube.com/embed/${yt[1]}?autoplay=1&rel=0`, tall: raw.includes("/shorts/") }
+  if (/\.(mp4|webm|mov|m4v)(\?|$)/i.test(raw) || raw.includes("/storage/v1/object/")) return { kind: "video", src: raw, tall: true }
+  return null
+}
+
+function openVideo(url) {
+  const media = videoEmbed(url)
+  if (!media) {
+    window.open(url, "_blank", "noopener,noreferrer")
+    return
+  }
+  const modal = document.createElement("div")
+  modal.className = "vmodal"
+  modal.setAttribute("role", "dialog")
+  modal.setAttribute("aria-modal", "true")
+  const box = document.createElement("div")
+  box.className = "vmodal-box" + (media.tall ? "" : " is-wide")
+  let player
+  if (media.kind === "video") {
+    player = document.createElement("video")
+    player.src = media.src
+    player.controls = true
+    player.autoplay = true
+    player.playsInline = true
+  } else {
+    player = document.createElement("iframe")
+    player.src = media.src
+    player.allow = "autoplay; encrypted-media; picture-in-picture"
+    player.allowFullscreen = true
+    player.title = "Video"
+  }
+  const close = document.createElement("button")
+  close.type = "button"
+  close.className = "vmodal-close"
+  close.setAttribute("aria-label", lang() === "hi" ? "बंद करें" : "Close")
+  close.textContent = "×"
+  const out = document.createElement("a")
+  out.className = "vmodal-out"
+  out.href = url
+  out.target = "_blank"
+  out.rel = "noopener noreferrer"
+  out.textContent = lang() === "hi" ? "ऐप में खोलें ›" : "Open in the app ›"
+  box.append(close, player, out)
+  modal.append(box)
+  const shut = () => {
+    modal.remove()
+    document.removeEventListener("keydown", onKey)
+  }
+  const onKey = (event) => { if (event.key === "Escape") shut() }
+  close.addEventListener("click", shut)
+  modal.addEventListener("click", (event) => { if (event.target === modal) shut() })
+  document.addEventListener("keydown", onKey)
+  document.body.append(modal)
+  close.focus()
 }
 
 function bookUrl(params) {
@@ -251,69 +491,80 @@ function renderAll() {
   renderLehenga()
   renderWizard()
   paintContact()
+  fillIcons()
+  observeReveals()
 }
 
 function packageCard(item, index) {
   const copy = t()
-  const plate = document.createElement("article")
-  plate.className = "plate reveal"
-  plate.style.animationDelay = `${Math.min(index, 8) * 60}ms`
-  const number = document.createElement("span")
-  number.className = "plate-no"
-  number.textContent = String(index + 1).padStart(2, "0")
-  const copyBlock = document.createElement("div")
+  const card = document.createElement("article")
+  card.className = "glass pkg reveal"
+  card.id = `pkg-${item.id}`
+  const thumb = document.createElement("div")
+  thumb.className = "pkg-thumb"
+  const img = document.createElement("img")
+  img.src = LOOK_IMAGES[index % LOOK_IMAGES.length]
+  img.alt = ""
+  img.loading = "lazy"
+  const no = document.createElement("span")
+  no.className = "pkg-no"
+  no.textContent = String(index + 1).padStart(2, "0")
+  thumb.append(img, no)
+  const body = document.createElement("div")
+  body.className = "pkg-body"
   const title = document.createElement("h3")
   title.textContent = field(item, "name")
   const note = document.createElement("p")
   note.textContent = field(item, "note")
-  copyBlock.append(title, note)
-  const media = document.createElement("div")
-  media.className = "pkg-media"
-  const videoUrl = item.ref_video_url || REEL_URL
-  const ref = document.createElement("a")
-  ref.className = "ref-video"
-  ref.href = videoUrl
-  ref.target = "_blank"
-  ref.rel = "noopener noreferrer"
-  ref.textContent = copy.refVideo
-  media.append(ref)
-  const end = document.createElement("div")
-  end.className = "plate-end"
-  const price = document.createElement("em")
+  const price = document.createElement("span")
+  price.className = "pkg-price"
   price.textContent = money(item.price_inr)
+  if (item.price_inr != null && item.price_inr !== "") {
+    const small = document.createElement("small")
+    small.textContent = lang() === "hi" ? "से शुरू" : "onwards"
+    price.append(small)
+  }
+  body.append(title, note, price)
+  const actions = document.createElement("div")
+  actions.className = "pkg-actions"
+  const video = document.createElement("button")
+  video.type = "button"
+  video.className = "btn btn-line btn-small"
+  video.dataset.video = item.ref_video_url || REEL_URL
+  video.innerHTML = `<span class="ico">${ICONS.play}</span>`
+  video.append(lang() === "hi" ? "वीडियो" : "Video")
   const button = document.createElement("a")
   button.className = "btn btn-gold btn-small"
   button.href = bookUrl({ type: "bridal", service: item.id })
   button.textContent = copy.askPackage
-  end.append(price, button)
-  plate.append(number, copyBlock, media, end)
-  return plate
+  actions.append(video, button)
+  card.append(thumb, body, actions)
+  return card
 }
 
 function renderPackages() {
-  const copy = t()
+  const list = state.packages
+    .filter((item) => item.active !== false)
+    .sort((a, b) => a.sort_order - b.sort_order)
   const full = $("#package-list")
   if (full) {
-    full.replaceChildren()
-    state.packages
-      .filter((item) => item.active !== false)
-      .sort((a, b) => a.sort_order - b.sort_order)
-      .forEach((item, index) => full.append(packageCard(item, index)))
+    full.replaceChildren(...list.map((item, index) => packageCard(item, index)))
+    const focus = new URLSearchParams(location.search).get("p")
+    const target = focus && document.getElementById(`pkg-${focus}`)
+    if (target) {
+      target.classList.add("is-focus", "is-in")
+      if (!renderPackages.scrolled) {
+        renderPackages.scrolled = true
+        setTimeout(() => target.scrollIntoView({ behavior: "smooth", block: "center" }), 200)
+      }
+    }
   }
   const preview = $("#package-preview")
-  if (preview) {
-    preview.replaceChildren()
-    state.packages
-      .filter((item) => item.active !== false)
-      .sort((a, b) => a.sort_order - b.sort_order)
-      .slice(0, 3)
-      .forEach((item, index) => preview.append(packageCard(item, index)))
-  }
+  if (preview) preview.replaceChildren(...list.slice(0, 3).map((item, index) => packageCard(item, index)))
   const bridalTab = $("#mode-bridal")
   const lehengaTab = $("#mode-lehenga")
   if (bridalTab) bridalTab.classList.toggle("is-on", state.btype === "bridal")
   if (lehengaTab) lehengaTab.classList.toggle("is-on", state.btype === "lehenga")
-  void copy
 }
 
 function lehMedia(item) {
@@ -322,21 +573,38 @@ function lehMedia(item) {
   return null
 }
 
+function lehFocusId() {
+  return new URLSearchParams(location.search).get("id")
+}
+
+function lehAvailable(item) {
+  return item.status === "available" || item.status === "returned"
+}
+
 function renderLehenga() {
   const grid = $("#lehenga-grid")
   if (!grid) return
   const copy = t()
+  const L = lang()
+  const focusId = lehFocusId()
+  const focusItem = focusId && lehengaById(focusId)
+  const note = $("#focus-note")
+  if (note) {
+    note.hidden = !focusItem
+    if (focusItem) note.textContent = L === "hi" ? `आपको भेजा गया लहंगा — टैग #${focusItem.tag_no}` : `The lehenga shared with you — tag #${focusItem.tag_no}`
+  }
   grid.replaceChildren()
   if (!state.lehengas.length) {
     const empty = document.createElement("p")
-    empty.className = "muted"
+    empty.className = "hint"
     empty.textContent = copy.noLehenga
     grid.append(empty)
   }
-  state.lehengas.forEach((item, index) => {
+  const ordered = focusItem ? [focusItem, ...state.lehengas.filter((item) => item.id !== focusItem.id)] : state.lehengas
+  ordered.forEach((item) => {
     const card = document.createElement("article")
-    card.className = "plate leh-card reveal"
-    card.style.animationDelay = `${Math.min(index, 8) * 60}ms`
+    card.className = "glass leh-card reveal" + (focusItem && item.id === focusItem.id ? " is-focus is-in" : "")
+    card.id = `leh-${item.id}`
     const media = lehMedia(item)
     const frame = document.createElement("div")
     frame.className = "leh-frame"
@@ -346,37 +614,57 @@ function renderLehenga() {
       video.controls = true
       video.preload = "metadata"
       video.playsInline = true
+      if (item.photo) video.poster = item.photo
       frame.append(video)
     } else if (media) {
       const img = document.createElement("img")
       img.src = media.src
-      img.alt = item.title || item.tag_no
+      img.alt = item.title || `Lehenga ${item.tag_no}`
       img.loading = "lazy"
       frame.append(img)
     } else {
-      frame.className += " leh-empty"
-      frame.textContent = `#${item.tag_no}`
+      frame.classList.add("leh-empty")
+      const span = document.createElement("span")
+      span.textContent = "✦"
+      frame.append(span)
     }
-    const body = document.createElement("div")
     const tag = document.createElement("span")
-    tag.className = "plate-no"
+    tag.className = "tagpill"
     tag.textContent = `#${item.tag_no}`
+    frame.append(tag)
+    const body = document.createElement("div")
+    body.className = "leh-body"
     const title = document.createElement("h3")
-    title.textContent = item.title || (lang() === "hi" ? "लहंगा" : "Lehenga")
-    const badge = document.createElement("p")
-    badge.className = "chip"
-    const bookedHere = state.date && isLehTaken(item.id, state.date)
-    badge.textContent = bookedHere
-      ? `${copy.booked}`
-      : (item.status === "available" ? copy.available : copy.taken)
+    title.textContent = item.title || (L === "hi" ? "ब्राइडल लहंगा" : "Bridal lehenga")
+    const badge = document.createElement("span")
+    badge.className = "status" + (lehAvailable(item) ? "" : " is-busy")
+    badge.textContent = lehAvailable(item) ? copy.available : (L === "hi" ? "अभी बुक — दूसरी तिथि देखें" : "Booked now — see other dates")
+    const row = document.createElement("div")
+    row.className = "btn-row"
+    const see = document.createElement("button")
+    see.type = "button"
+    see.className = "btn btn-line btn-small"
+    see.textContent = L === "hi" ? "तिथि देखें" : "See dates"
+    see.addEventListener("click", () => {
+      state.lehenga = item.id
+      renderLehCalendar()
+      const cal = $("#leh-cal")
+      if (cal) cal.scrollIntoView({ behavior: "smooth", block: "start" })
+    })
     const button = document.createElement("a")
     button.className = "btn btn-gold btn-small"
     button.href = bookUrl({ type: "lehenga", lehenga: item.id })
-    button.textContent = copy.askLehenga
-    body.append(tag, title, badge, button)
+    button.textContent = L === "hi" ? "बुक करें" : "Book"
+    row.append(see, button)
+    body.append(title, badge, row)
     card.append(frame, body)
     grid.append(card)
   })
+  if (focusItem && !renderLehenga.scrolled) {
+    renderLehenga.scrolled = true
+    state.lehenga = focusItem.id
+    setTimeout(() => document.getElementById(`leh-${focusItem.id}`)?.scrollIntoView({ behavior: "smooth", block: "start" }), 250)
+  }
   renderLehCalendar()
 }
 
@@ -388,14 +676,27 @@ function renderLehCalendar() {
   if (!days || !week || !label) return
   const copy = t()
   label.textContent = `${copy.months[state.lehView.getMonth()]} ${state.lehView.getFullYear()}`
-  week.replaceChildren()
-  copy.weeks.forEach((day) => {
+  week.replaceChildren(...copy.weeks.map((day) => {
     const span = document.createElement("span")
     span.textContent = day
-    week.append(span)
-  })
+    return span
+  }))
   const current = lehengaById(state.lehenga) || state.lehengas[0]
   if (hint) hint.textContent = current ? copy.lehHintFor.replace("{tag}", current.tag_no) : copy.lehHintPick
+  const pick = $("#leh-pick")
+  if (pick) {
+    pick.replaceChildren(...state.lehengas.map((item) => {
+      const chip = document.createElement("button")
+      chip.type = "button"
+      chip.className = "pick" + (current && current.id === item.id ? " is-on" : "")
+      chip.textContent = `#${item.tag_no}${item.title ? ` · ${item.title}` : ""}`
+      chip.addEventListener("click", () => {
+        state.lehenga = item.id
+        renderLehCalendar()
+      })
+      return chip
+    }))
+  }
   const today = startOfDay(new Date())
   const max = addDays(today, 60)
   const prev = $("#leh-prev")
@@ -413,39 +714,17 @@ function renderLehCalendar() {
     button.className = "day"
     button.textContent = String(day)
     const off = startOfDay(date) < today || startOfDay(date) > max
-    const busy = current && !off && isLehTaken(current.id, date)
-    if (busy) {
+    if (sameDay(date, today)) button.classList.add("is-today")
+    if (off) {
+      button.classList.add("is-off")
+    } else if (current && isLehTaken(current.id, date)) {
       button.classList.add("is-busy")
       button.title = copy.taken
-      button.removeAttribute("href")
-    } else if (!off) {
+    } else {
       button.classList.add("is-free")
       if (current) button.href = bookUrl({ type: "lehenga", lehenga: current.id, date: iso(date) })
-    } else {
-      button.style.opacity = "0.35"
     }
     days.append(button)
-  }
-}
-
-function paintContact() {
-  const main = $("#phone-main")
-  const digits = String(state.settings.phone_main || "").replace(/\D/g, "").replace(/^91/, "")
-  if (main && digits.length === 10) {
-    main.textContent = prettyPhone(digits)
-    main.href = `tel:+91${digits}`
-  }
-  const mail = $("#mail-link")
-  if (mail && state.settings.email) {
-    mail.textContent = state.settings.email
-    mail.href = `mailto:${state.settings.email}`
-  }
-  const hours = $("#hours-block")
-  if (hours && state.settings.hours_hi) {
-    const hi = hours.querySelector(".t-hi")
-    const en = hours.querySelector(".t-en")
-    if (hi) hi.textContent = state.settings.hours_hi
-    if (en) en.textContent = state.settings.hours_en || state.settings.hours_hi
   }
 }
 
@@ -921,7 +1200,7 @@ async function loadStudio() {
   const [services, slots, settings] = await Promise.all([
     db.from("services").select("id,category,group_key,name_hi,name_en,note_hi,note_en,price_inr,sort_order,active,ref_video_url").eq("category", "bridal").eq("active", true).order("sort_order"),
     db.from("time_slots").select("id,label_hi,label_en,starts,ends,sort_order,active").eq("active", true).order("sort_order"),
-    db.from("studio_settings").select("whatsapp,phone_main,email,facebook,instagram,hours_hi,hours_en").limit(1),
+    db.from("studio_settings").select("whatsapp,phone_main,email,facebook,instagram,hours_hi,hours_en,address_hi,address_en,directions_hi,directions_en,map_lat,map_lng").limit(1),
   ])
   if (services.data?.length) state.packages = services.data
   if (slots.data?.length) state.slots = slots.data
@@ -964,9 +1243,17 @@ function applyBookParams() {
 
 function bindChrome() {
   const saved = (() => {
-    try { return localStorage.getItem("tanishq-lang") } catch { return null }
+    try { return localStorage.getItem("sparkle-lang") } catch { return null }
   })()
+  mountChrome()
   applyLang(saved === "en" ? "en" : "hi")
+
+  document.addEventListener("click", (event) => {
+    const trigger = event.target.closest("[data-video]")
+    if (!trigger) return
+    event.preventDefault()
+    openVideo(trigger.dataset.video)
+  })
 
   const toggle = $("[data-lang-toggle]")
   if (toggle) toggle.addEventListener("click", () => {
@@ -1014,7 +1301,6 @@ function bindChrome() {
     })
   }
 
-  const glow = $(".cursor-glow")
   const fine = window.matchMedia("(pointer: fine)").matches
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   const stage = $("[data-slab]")
@@ -1031,7 +1317,6 @@ function bindChrome() {
       stage.style.removeProperty("--rx")
     })
   }
-  void glow
 
   const backBtn = $("#back-btn")
   if (backBtn) backBtn.addEventListener("click", () => {
@@ -1096,7 +1381,7 @@ function mountDust() {
       const x = speck.x * width + Math.sin(now / 900 + speck.drift) * 10
       const y = speck.y * height
       ctx.beginPath()
-      ctx.fillStyle = `rgba(169,124,51,${speck.o * sparkle})`
+      ctx.fillStyle = `rgba(201,161,78,${speck.o * sparkle})`
       ctx.arc(x, y, speck.r, 0, Math.PI * 2)
       ctx.fill()
     })

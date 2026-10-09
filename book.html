@@ -2,152 +2,81 @@
 <html lang="hi">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Booking | Sparkle Makeover, Orai</title>
     <meta name="description" content="Book a Sparkle Makeover bridal package or lehenga date. Confirmation comes on WhatsApp." />
-    <meta name="theme-color" content="#faf5ec" />
-    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <meta property="og:title" content="Booking | Sparkle Makeover, Orai" />
+    <meta property="og:description" content="Book a Sparkle Makeover bridal package or lehenga date. Confirmation comes on WhatsApp." />
+    <meta property="og:image" content="assets/tanishq-look-bridal.jpg" />
+    <meta name="theme-color" content="#3a0d1d" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,520;0,9..144,640;1,9..144,520&family=Noto+Sans+Devanagari:wght@400;500;600&family=Outfit:wght@340;460;560&family=Tiro+Devanagari+Hindi&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Mukta:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <a class="skip" href="#wizard">
-      <span class="t-hi">फॉर्म पर जाएँ</span>
-      <span class="t-en">Skip to the form</span>
-    </a>
+    <a class="skip" href="#main"><span class="t-hi">मुख्य भाग पर जाएँ</span><span class="t-en">Skip to content</span></a>
     <canvas class="dust" aria-hidden="true"></canvas>
 
-    <header class="nav" data-nav>
+    <header class="nav">
       <a class="brand" href="index.html">
-        <img src="assets/logo.svg" alt="Sparkle Makeover logo" width="44" height="44" />
-        <span>
-          <strong>Sparkle</strong>
-          <small>Makeover · Orai</small>
-        </span>
+        <img src="assets/logo.svg" alt="" width="42" height="42" />
+        <span><strong>Sparkle</strong><small>Makeover · Orai</small></span>
       </a>
-      <nav class="nav-links" aria-label="Sections">
+      <nav class="nav-links" aria-label="Pages">
         <a href="index.html"><span class="t-hi">होम</span><span class="t-en">Home</span></a>
-        <a href="packages.html"><span class="t-hi">पैकेज</span><span class="t-en">Packages</span></a>
+        <a href="packages.html"><span class="t-hi">ब्राइडल पैकेज</span><span class="t-en">Bridal packages</span></a>
         <a href="lehenga.html"><span class="t-hi">लहंगा</span><span class="t-en">Lehenga</span></a>
-        <a href="visit.html"><span class="t-hi">स्टूडियो</span><span class="t-en">Studio</span></a>
+        <a href="#visit"><span class="t-hi">पता</span><span class="t-en">Find us</span></a>
       </nav>
       <div class="nav-actions">
-        <button class="lang" type="button" data-lang-toggle aria-label="Language">
-          <span data-lang-label>EN</span>
-        </button>
-        <a class="btn btn-gold btn-small" href="tel:+918081817807">
-          <span class="t-hi">कॉल करें</span>
-          <span class="t-en">Call</span>
-        </a>
+        <button class="lang" type="button" data-lang-toggle aria-label="Language"><span data-lang-label>EN</span></button>
+        <a class="btn btn-gold btn-small" href="tel:+918081817807"><span class="t-hi">कॉल करें</span><span class="t-en">Call</span></a>
         <button class="menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="sheet">
-          <span></span><span></span>
-          <span class="sr-only t-hi">मेनू</span>
-          <span class="sr-only t-en">Menu</span>
+          <span></span><span></span><span class="sr-only">Menu</span>
         </button>
       </div>
     </header>
-
-    <div class="sheet" id="sheet" hidden>
+    <nav class="sheet" id="sheet" hidden>
       <a href="index.html" data-sheet-link><span class="t-hi">होम</span><span class="t-en">Home</span></a>
       <a href="packages.html" data-sheet-link><span class="t-hi">ब्राइडल पैकेज</span><span class="t-en">Bridal packages</span></a>
-      <a href="lehenga.html" data-sheet-link><span class="t-hi">लहंगा</span><span class="t-en">Lehenga</span></a>
-      <a href="visit.html" data-sheet-link><span class="t-hi">पता और समय</span><span class="t-en">Address and hours</span></a>
+      <a href="lehenga.html" data-sheet-link><span class="t-hi">लहंगा और तिथियाँ</span><span class="t-en">Lehenga and dates</span></a>
       <a href="book.html" data-sheet-link><span class="t-hi">बुकिंग</span><span class="t-en">Booking</span></a>
-    </div>
+      <a href="#visit" data-sheet-link><span class="t-hi">पता और रास्ता</span><span class="t-en">Address and route</span></a>
+    </nav>
 
     <main id="main">
-      <div class="page-hero">
-        <p class="kicker">
-          <span class="t-hi">कदम 3 · नाम भेजें</span>
-          <span class="t-en">Step 3 · Send your name</span>
-        </p>
-        <h1>
-          <span class="t-hi">बुकिंग</span>
-          <span class="t-en">Booking</span>
-        </h1>
-        <p>
-          <span class="t-hi">ऊपर ब्राइडल पैकेज या लहंगा चुनें। भरी हुई तिथि चुनी नहीं जाएगी। WhatsApp अंत में खुलेगा — तिथि पुष्टि के बाद ही निश्चित होगी।</span>
-          <span class="t-en">Choose a bridal package or lehenga above. A taken date cannot be chosen. WhatsApp opens at the end — the date is fixed only after confirmation.</span>
-        </p>
-      </div>
-      <section class="section" style="padding-top: 12px">
+      <section class="page-hero">
+        <span class="script">Booking</span>
+        <h1><span class="t-hi">अपनी तिथि बुक करें</span><span class="t-en">Book your date</span></h1>
+        <p><span class="t-hi">भरी हुई तिथि चुनी नहीं जाएगी। अंत में WhatsApp खुलेगा — तिथि स्टूडियो की पुष्टि के बाद ही पक्की होगी।</span><span class="t-en">A taken date cannot be chosen. WhatsApp opens at the end — the date is fixed once the studio confirms.</span></p>
+        <ol class="trail"><li><span class="t-hi">1 · चुनें</span><span class="t-en">1 · Choose</span></li><li><span class="t-hi">2 · तिथि</span><span class="t-en">2 · Date</span></li><li class="is-on"><span class="t-hi">3 · WhatsApp</span><span class="t-en">3 · WhatsApp</span></li></ol>
+      </section>
+      <section class="section">
         <div class="glass book">
           <div class="book-switch" role="tablist">
-            <button type="button" id="mode-bridal" role="tab">
-              <span class="t-hi">ब्राइडल पैकेज</span>
-              <span class="t-en">Bridal package</span>
-            </button>
-            <button type="button" id="mode-lehenga" role="tab">
-              <span class="t-hi">लहंगा</span>
-              <span class="t-en">Lehenga</span>
-            </button>
+            <button type="button" id="mode-bridal" role="tab"><span class="t-hi">ब्राइडल पैकेज</span><span class="t-en">Bridal package</span></button>
+            <button type="button" id="mode-lehenga" role="tab"><span class="t-hi">लहंगा</span><span class="t-en">Lehenga</span></button>
           </div>
           <ol class="rail" id="rail"></ol>
           <div id="wizard"></div>
           <p class="form-error" id="form-error" role="alert"></p>
           <div class="book-nav">
-            <button class="btn btn-glass" type="button" id="back-btn">
-              <span class="t-hi">पिछला</span>
-              <span class="t-en">Back</span>
-            </button>
-            <button class="btn btn-gold" type="button" id="next-btn">
-              <span class="t-hi">अगला</span>
-              <span class="t-en">Next</span>
-            </button>
+            <button class="btn btn-line" type="button" id="back-btn"><span class="t-hi">पिछला</span><span class="t-en">Back</span></button>
+            <button class="btn btn-gold" type="button" id="next-btn"><span class="t-hi">अगला</span><span class="t-en">Next</span></button>
           </div>
           <div class="success" id="success" hidden tabindex="-1">
-            <h3>
-              <span class="t-hi">अनुरोध दर्ज हो गया।</span>
-              <span class="t-en">The request has been recorded.</span>
-            </h3>
-            <p>
-              <span class="t-hi">तिथि तब निश्चित है जब स्टूडियो WhatsApp पर पुष्टि करे। यदि संदेश नहीं खुला, नीचे का बटन दबाएँ।</span>
-              <span class="t-en">The date is fixed when the studio confirms it on WhatsApp. If the message did not open, use the button below.</span>
-            </p>
-            <a class="btn btn-gold" id="wa-fallback" href="https://wa.me/918081817807" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-            <button class="btn btn-glass" type="button" id="reset-btn">
-              <span class="t-hi">नया अनुरोध</span>
-              <span class="t-en">New request</span>
-            </button>
+            <h3><span class="t-hi">अनुरोध दर्ज हो गया</span><span class="t-en">Your request is recorded</span></h3>
+            <p><span class="t-hi">तिथि तब पक्की है जब स्टूडियो WhatsApp पर पुष्टि करे। संदेश नहीं खुला तो नीचे का बटन दबाएँ।</span><span class="t-en">The date is fixed when the studio confirms on WhatsApp. If the message did not open, use the button below.</span></p>
+            <a class="btn btn-wa" id="wa-fallback" href="https://wa.me/918081817807" target="_blank" rel="noopener noreferrer"><span class="ico" data-icon="wa"></span>WhatsApp</a>
+            <button class="btn btn-line" type="button" id="reset-btn"><span class="t-hi">नया अनुरोध</span><span class="t-en">New request</span></button>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <div>
-        <strong>Sparkle Makeover</strong>
-        <p>Orai · 285001</p>
-      </div>
-      <p class="fine">
-        <span class="t-hi">हनुमान चबूतरा के पास, राजेन्द्र नगर। सुबह 11 – रात 8, सभी दिन।</span>
-        <span class="t-en">Near Hanuman Chabutara, Rajendra Nagar. 11 AM – 8 PM, all days.</span>
-      </p>
-      <p class="credit">
-        <span class="t-hi">Designed by <b>Vikram · OrbitCore</b></span>
-        <span class="t-en">Designed by <b>Vikram · OrbitCore</b></span>
-      </p>
-      <a class="btn btn-glass btn-small foot-login" href="admin.html">
-        <span class="t-hi">स्टूडियो लॉगिन</span>
-        <span class="t-en">Studio login</span>
-      </a>
-    </footer>
-
-    <div class="dock">
-      <a href="tel:+918081817807">
-        <span class="t-hi">कॉल</span>
-        <span class="t-en">Call</span>
-      </a>
-      <a href="visit.html">
-        <span class="t-hi">पता</span>
-        <span class="t-en">Visit</span>
-      </a>
-    </div>
+    <div id="site-end"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
     <script src="config.js"></script>

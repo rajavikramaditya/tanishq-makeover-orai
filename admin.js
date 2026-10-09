@@ -93,6 +93,26 @@ const TEXT = {
     confirmReq: "पुष्ट करें",
     cancelReq: "रद्द करें",
     bookedDays: "बुक तिथियाँ",
+    shareTitle: "ग्राहक को भेजें",
+    shareCatalogue: "पूरा लहंगा कैटलॉग भेजें",
+    sharePackages: "पूरा पैकेज कैटलॉग भेजें",
+    sharePhone: "ग्राहक का WhatsApp नंबर",
+    sharePhoneHint: "10 अंक। खाली छोड़ें तो WhatsApp में contact चुनें।",
+    shareToNumber: "इस नंबर पर भेजें",
+    sharePick: "WhatsApp में contact चुनें",
+    shareCopy: "लिंक कॉपी / दूसरे ऐप",
+    copied: "लिंक कॉपी हो गया।",
+    badPhone: "सही 10 अंकों का नंबर लिखें।",
+    instagram: "Instagram लिंक",
+    facebook: "Facebook लिंक",
+    location: "पता और रास्ता",
+    addrHi: "पता, हिन्दी",
+    addrEn: "पता, English",
+    dirHi: "गली का रास्ता, हिन्दी (वेबसाइट पर दिखेगा)",
+    dirEn: "गली का रास्ता, English",
+    lat: "मैप पिन — Latitude",
+    lng: "मैप पिन — Longitude",
+    pinHint: "Google Maps में पार्लर पर देर तक दबाएँ, ऊपर आए दोनों अंक यहाँ लिखें।",
   },
   en: {
     loginTitle: "Studio desk",
@@ -188,6 +208,26 @@ const TEXT = {
     confirmReq: "Confirm",
     cancelReq: "Cancel",
     bookedDays: "Booked dates",
+    shareTitle: "Send to a client",
+    shareCatalogue: "Send the full lehenga catalogue",
+    sharePackages: "Send the full package catalogue",
+    sharePhone: "Client WhatsApp number",
+    sharePhoneHint: "10 digits. Leave blank to pick a contact in WhatsApp.",
+    shareToNumber: "Send to this number",
+    sharePick: "Pick a contact in WhatsApp",
+    shareCopy: "Copy link / other apps",
+    copied: "Link copied.",
+    badPhone: "Enter a valid 10-digit number.",
+    instagram: "Instagram link",
+    facebook: "Facebook link",
+    location: "Address and route",
+    addrHi: "Address, Hindi",
+    addrEn: "Address, English",
+    dirHi: "Lane directions, Hindi (shown on the site)",
+    dirEn: "Lane directions, English",
+    lat: "Map pin — latitude",
+    lng: "Map pin — longitude",
+    pinHint: "Long-press the parlour in Google Maps and copy the two numbers shown.",
   },
 }
 
@@ -460,12 +500,66 @@ function packageForm(service) {
       <label><input name="active" type="checkbox" ${service?.active !== false ? "checked" : ""}/> ${esc(a("active"))}</label>
     </div>
     <button class="gold" type="submit">${esc(a("save"))}</button>
+    ${service ? shareBox("package", id, "") : ""}
   </form>`
 }
 
 function packagesHtml() {
   const forms = services.map(packageForm).join("")
-  return `${forms}${packageForm(null)}`
+  return `<section class="editor share-card">
+      <h2>${esc(a("sharePackages"))}</h2>
+      ${shareBox("packages-all", "", "")}
+    </section>${forms}${packageForm(null)}`
+}
+
+function shareBox(kind, id, phone) {
+  return `<div class="share-box" data-kind="${esc(kind)}" data-id="${esc(id)}">
+    ${kind === "lehenga" || kind === "package" ? `<p class="share-title">${esc(a("shareTitle"))}</p>` : ""}
+    <label>${esc(a("sharePhone"))}<input type="tel" inputmode="numeric" maxlength="14" placeholder="98XXXXXXXX" value="${esc(String(phone || "").replace(/\D/g, "").replace(/^91(?=\d{10}$)/, ""))}" /></label>
+    <p class="muted small">${esc(a("sharePhoneHint"))}</p>
+    <div class="actions">
+      <button class="wa" type="button" data-act="share-number">${esc(a("shareToNumber"))}</button>
+      <button class="quiet" type="button" data-act="share-pick">${esc(a("sharePick"))}</button>
+      <button class="quiet" type="button" data-act="share-copy">${esc(a("shareCopy"))}</button>
+    </div>
+  </div>`
+}
+
+function siteUrl(path) {
+  return new URL(path, location.href).href
+}
+
+function shareText(kind, id) {
+  const hi = lang === "hi"
+  if (kind === "lehenga") {
+    const item = lehengas.find((row) => row.id === id)
+    if (!item) return ""
+    const free = item.status === "available" || item.status === "returned"
+    const lines = hi
+      ? ["नमस्ते,", "Sparkle Makeover, ओराई की ओर से आपके लिए लहंगा", "", `टैग: #${item.tag_no}${item.title ? ` · ${item.title}` : ""}`, `स्थिति: ${free ? "उपलब्ध" : "बुक — दूसरी तिथि पूछें"}`, "", "फ़ोटो, वीडियो और खाली तिथियाँ यहाँ देखें:", siteUrl(`lehenga.html?id=${encodeURIComponent(item.id)}`)]
+      : ["Hello,", "A lehenga for you from Sparkle Makeover, Orai", "", `Tag: #${item.tag_no}${item.title ? ` · ${item.title}` : ""}`, `Status: ${free ? "Available" : "Booked — ask for another date"}`, "", "Photos, video and free dates:", siteUrl(`lehenga.html?id=${encodeURIComponent(item.id)}`)]
+    if (item.video_url && item.video_url.startsWith("http")) lines.push("", hi ? `वीडियो: ${item.video_url}` : `Video: ${item.video_url}`)
+    if (item.photo && item.photo.startsWith("http")) lines.push(hi ? `फ़ोटो: ${item.photo}` : `Photo: ${item.photo}`)
+    lines.push("", hi ? "तिथि बुक करनी हो तो इसी चैट में उत्तर दें।" : "Reply in this chat to book a date.")
+    return lines.join("\n")
+  }
+  if (kind === "package") {
+    const item = services.find((row) => row.id === id)
+    if (!item) return ""
+    const lines = hi
+      ? ["नमस्ते,", "Sparkle Makeover, ओराई — ब्राइडल पैकेज", "", `पैकेज: ${item.name_hi}`, item.note_hi || "", `शुल्क: ${item.price_inr != null ? `₹${item.price_inr}` : "परामर्श पर"}`, "", "वीडियो और बुकिंग:", siteUrl(`packages.html?p=${encodeURIComponent(item.id)}`)]
+      : ["Hello,", "Sparkle Makeover, Orai — bridal package", "", `Package: ${item.name_en}`, item.note_en || "", `Fee: ${item.price_inr != null ? `₹${item.price_inr}` : "On consultation"}`, "", "Video and booking:", siteUrl(`packages.html?p=${encodeURIComponent(item.id)}`)]
+    if (item.ref_video_url) lines.push(hi ? `संदर्भ वीडियो: ${item.ref_video_url}` : `Reference video: ${item.ref_video_url}`)
+    return lines.filter((line, index, all) => line || all[index - 1]).join("\n")
+  }
+  if (kind === "lehenga-all") {
+    return (hi
+      ? ["नमस्ते,", "Sparkle Makeover, ओराई का लहंगा संग्रह — फ़ोटो, वीडियो और खाली तिथियाँ:", siteUrl("lehenga.html"), "", "पसंद आए तो टैग नंबर के साथ उत्तर दें।"]
+      : ["Hello,", "The Sparkle Makeover, Orai lehenga collection — photos, video and free dates:", siteUrl("lehenga.html"), "", "Reply with the tag number you like."]).join("\n")
+  }
+  return (hi
+    ? ["नमस्ते,", "Sparkle Makeover, ओराई के ब्राइडल पैकेज — वीडियो और शुल्क के साथ:", siteUrl("packages.html"), "", "पसंद का पैकेज बताएँ, हम तिथि पक्की कर देंगे।"]
+    : ["Hello,", "Sparkle Makeover, Orai bridal packages — with videos and fees:", siteUrl("packages.html"), "", "Tell us the package you like and we will fix the date."]).join("\n")
 }
 
 function lehMediaTag(item) {
@@ -505,14 +599,18 @@ function lehengaHtml() {
         <div class="actions">
           <button class="gold" type="submit">${esc(a("save"))}</button>
           ${item.video_url ? `<button class="quiet" type="button" data-act="remove-video" data-id="${esc(item.id)}">${esc(a("removeVideo"))}</button>` : ""}
-          <button class="quiet" type="button" data-act="wa-lehenga" data-id="${esc(item.id)}">${esc(a("send"))}</button>
           <button class="danger" type="button" data-act="delete-lehenga" data-id="${esc(item.id)}">${esc(a("remove"))}</button>
         </div>
       </form>
+      ${shareBox("lehenga", item.id, item.client_phone)}
       ${reqRows}
     </article>`
   }).join("")
   return `
+    <section class="editor share-card">
+      <h2>${esc(a("shareCatalogue"))}</h2>
+      ${shareBox("lehenga-all", "", "")}
+    </section>
     <form class="editor" data-form="lehenga-new">
       <h2>${esc(a("newLehenga"))}</h2>
       <label>${esc(a("tag"))}<input name="tag_no" required /></label>
@@ -549,7 +647,18 @@ function settingsHtml() {
       <label>${esc(a("mail"))}<input name="email" type="email" value="${esc(settings.email || "")}" /></label>
       <label>${esc(a("hoursHi"))}<input name="hours_hi" value="${esc(settings.hours_hi || "")}" /></label>
       <label>${esc(a("hoursEn"))}<input name="hours_en" value="${esc(settings.hours_en || "")}" /></label>
-      <label>${esc(a("social"))}<input name="facebook" value="${esc(settings.facebook || settings.instagram || "")}" /></label>
+      <label>${esc(a("instagram"))}<input name="instagram" type="url" value="${esc(settings.instagram || "")}" /></label>
+      <label>${esc(a("facebook"))}<input name="facebook" type="url" value="${esc(settings.facebook || "")}" /></label>
+      <h2>${esc(a("location"))}</h2>
+      <label>${esc(a("addrHi"))}<input name="address_hi" value="${esc(settings.address_hi || "")}" /></label>
+      <label>${esc(a("addrEn"))}<input name="address_en" value="${esc(settings.address_en || "")}" /></label>
+      <label>${esc(a("dirHi"))}<textarea name="directions_hi" maxlength="400">${esc(settings.directions_hi || "")}</textarea></label>
+      <label>${esc(a("dirEn"))}<textarea name="directions_en" maxlength="400">${esc(settings.directions_en || "")}</textarea></label>
+      <div class="grid-2">
+        <label>${esc(a("lat"))}<input name="map_lat" inputmode="decimal" value="${esc(settings.map_lat ?? "")}" /></label>
+        <label>${esc(a("lng"))}<input name="map_lng" inputmode="decimal" value="${esc(settings.map_lng ?? "")}" /></label>
+      </div>
+      <p class="muted small">${esc(a("pinHint"))}</p>
       <button class="gold" type="submit">${esc(a("save"))}</button>
     </form>
     <h2>${esc(a("slots"))}</h2>
@@ -701,7 +810,13 @@ async function onSubmit(event) {
         hours_hi: data.hours_hi || "",
         hours_en: data.hours_en || "",
         facebook: (data.facebook || "").trim(),
-        instagram: (data.facebook || "").trim(),
+        instagram: (data.instagram || "").trim(),
+        address_hi: (data.address_hi || "").trim(),
+        address_en: (data.address_en || "").trim(),
+        directions_hi: (data.directions_hi || "").trim(),
+        directions_en: (data.directions_en || "").trim(),
+        map_lat: Number.isFinite(parseFloat(data.map_lat)) ? parseFloat(data.map_lat) : null,
+        map_lng: Number.isFinite(parseFloat(data.map_lng)) ? parseFloat(data.map_lng) : null,
         updated_at: new Date().toISOString(),
       }).eq("id", 1)
       if (error) return fail(error)
@@ -800,25 +915,36 @@ async function onClick(event) {
       await loadCore()
       render()
     }
-    if (act === "wa-lehenga") {
-      const item = lehengas.find((row) => row.id === button.dataset.id)
-      if (!item) return
-      const paid = item.paid_status === "paid" ? a("paidFull") : a(item.paid_status)
-      const lines = [
-        "Sparkle Makeover, ओराई",
-        "लहंगा बुकिंग",
-        `टैग: ${item.tag_no}`,
-        item.title ? `नाम: ${item.title}` : "",
-        `स्थिति: ${a(item.status)}`,
-        item.client_name ? `ग्राहक: ${item.client_name}` : "",
-        item.event_date ? `तिथि: ${item.event_date}` : "",
-        `भुगतान: ${paid}`,
-        item.amount_inr != null ? `राशि: ₹${item.amount_inr}` : "",
-        item.note ? `टिप्पणी: ${item.note}` : "",
-      ].filter(Boolean)
-      const phone = String(item.client_phone || settings.whatsapp || "").replace(/\D/g, "")
-      const number = phone.length === 10 ? `91${phone}` : phone
-      window.open(`https://wa.me/${number}?text=${encodeURIComponent(lines.join("\n"))}`, "_blank", "noopener,noreferrer")
+    if (act === "share-number" || act === "share-pick" || act === "share-copy") {
+      const box = button.closest(".share-box")
+      const text = shareText(box.dataset.kind, box.dataset.id)
+      if (!text) return
+      if (act === "share-copy") {
+        if (navigator.share) {
+          try { await navigator.share({ title: "Sparkle Makeover", text }); return } catch (error) { if (error?.name === "AbortError") return }
+        }
+        try { await navigator.clipboard.writeText(text) } catch {
+          const area = document.createElement("textarea")
+          area.value = text
+          document.body.append(area)
+          area.select()
+          document.execCommand("copy")
+          area.remove()
+        }
+        toast(a("copied"))
+        return
+      }
+      let number = ""
+      if (act === "share-number") {
+        const digits = box.querySelector("input").value.replace(/\D/g, "").replace(/^0+/, "")
+        if (/^[6-9]\d{9}$/.test(digits)) number = `91${digits}`
+        else if (/^91[6-9]\d{9}$/.test(digits)) number = digits
+        else return toast(a("badPhone"), true)
+      }
+      const url = number
+        ? `https://wa.me/${number}?text=${encodeURIComponent(text)}`
+        : `https://wa.me/?text=${encodeURIComponent(text)}`
+      window.open(url, "_blank", "noopener,noreferrer")
     }
   } catch (error) {
     fail(error)

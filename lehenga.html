@@ -2,135 +2,80 @@
 <html lang="hi">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Lehenga with dates | Sparkle Makeover, Orai</title>
-    <meta name="description" content="Sparkle Makeover lehenga collection with photos, videos, and a live booking calendar." />
-    <meta name="theme-color" content="#faf5ec" />
-    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <meta name="description" content="Sparkle Makeover lehenga collection with photos, videos and a live date calendar." />
+    <meta property="og:title" content="Lehenga with dates | Sparkle Makeover, Orai" />
+    <meta property="og:description" content="Sparkle Makeover lehenga collection with photos, videos and a live date calendar." />
+    <meta property="og:image" content="assets/tanishq-look-bridal.jpg" />
+    <meta name="theme-color" content="#3a0d1d" />
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,520;0,9..144,640;1,9..144,520&family=Noto+Sans+Devanagari:wght@400;500;600&family=Outfit:wght@340;460;560&family=Tiro+Devanagari+Hindi&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Mukta:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <a class="skip" href="#lehenga-grid">
-      <span class="t-hi">लहंगे पर जाएँ</span>
-      <span class="t-en">Skip to lehengas</span>
-    </a>
+    <a class="skip" href="#main"><span class="t-hi">मुख्य भाग पर जाएँ</span><span class="t-en">Skip to content</span></a>
     <canvas class="dust" aria-hidden="true"></canvas>
 
-    <header class="nav" data-nav>
+    <header class="nav">
       <a class="brand" href="index.html">
-        <img src="assets/logo.svg" alt="Sparkle Makeover logo" width="44" height="44" />
-        <span>
-          <strong>Sparkle</strong>
-          <small>Makeover · Orai</small>
-        </span>
+        <img src="assets/logo.svg" alt="" width="42" height="42" />
+        <span><strong>Sparkle</strong><small>Makeover · Orai</small></span>
       </a>
-      <nav class="nav-links" aria-label="Sections">
+      <nav class="nav-links" aria-label="Pages">
         <a href="index.html"><span class="t-hi">होम</span><span class="t-en">Home</span></a>
-        <a href="packages.html"><span class="t-hi">पैकेज</span><span class="t-en">Packages</span></a>
+        <a href="packages.html"><span class="t-hi">ब्राइडल पैकेज</span><span class="t-en">Bridal packages</span></a>
         <a href="lehenga.html" class="is-on"><span class="t-hi">लहंगा</span><span class="t-en">Lehenga</span></a>
-        <a href="visit.html"><span class="t-hi">स्टूडियो</span><span class="t-en">Studio</span></a>
+        <a href="#visit"><span class="t-hi">पता</span><span class="t-en">Find us</span></a>
       </nav>
       <div class="nav-actions">
-        <button class="lang" type="button" data-lang-toggle aria-label="Language">
-          <span data-lang-label>EN</span>
-        </button>
-        <a class="btn btn-gold btn-small" href="book.html">
-          <span class="t-hi">बुक करें</span>
-          <span class="t-en">Book</span>
-        </a>
+        <button class="lang" type="button" data-lang-toggle aria-label="Language"><span data-lang-label>EN</span></button>
+        <a class="btn btn-gold btn-small" href="book.html?type=lehenga"><span class="t-hi">बुक करें</span><span class="t-en">Book</span></a>
         <button class="menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="sheet">
-          <span></span><span></span>
-          <span class="sr-only t-hi">मेनू</span>
-          <span class="sr-only t-en">Menu</span>
+          <span></span><span></span><span class="sr-only">Menu</span>
         </button>
       </div>
     </header>
-
-    <div class="sheet" id="sheet" hidden>
+    <nav class="sheet" id="sheet" hidden>
       <a href="index.html" data-sheet-link><span class="t-hi">होम</span><span class="t-en">Home</span></a>
       <a href="packages.html" data-sheet-link><span class="t-hi">ब्राइडल पैकेज</span><span class="t-en">Bridal packages</span></a>
-      <a href="lehenga.html" data-sheet-link><span class="t-hi">लहंगा</span><span class="t-en">Lehenga</span></a>
-      <a href="visit.html" data-sheet-link><span class="t-hi">पता और समय</span><span class="t-en">Address and hours</span></a>
+      <a href="lehenga.html" data-sheet-link><span class="t-hi">लहंगा और तिथियाँ</span><span class="t-en">Lehenga and dates</span></a>
       <a href="book.html" data-sheet-link><span class="t-hi">बुकिंग</span><span class="t-en">Booking</span></a>
-    </div>
+      <a href="#visit" data-sheet-link><span class="t-hi">पता और रास्ता</span><span class="t-en">Address and route</span></a>
+    </nav>
 
     <main id="main">
-      <div class="page-hero">
-        <p class="kicker">
-          <span class="t-hi">कदम 1–2 · चुनें और तिथि देखें</span>
-          <span class="t-en">Steps 1–2 · Choose and see dates</span>
-        </p>
-        <h1>
-          <span class="t-hi">लहंगा — फ़ोटो, वीडियो और तिथि</span>
-          <span class="t-en">Lehenga — photos, video, and dates</span>
-        </h1>
-        <p>
-          <span class="t-hi">पहले लहंगा चुनें, फिर नीचे कैलेंडर में तिथि देखें। जिस तिथि पर निशान है, वह उस लहंगे के लिए भरी है।</span>
-          <span class="t-en">Choose the lehenga first, then see the date in the calendar below. A marked date is taken for that lehenga.</span>
-        </p>
-      </div>
-      <section class="section" style="padding-top: 12px">
+      <section class="page-hero">
+        <span class="script">Lehenga</span>
+        <h1><span class="t-hi">लहंगा — फ़ोटो, वीडियो और तिथि</span><span class="t-en">Lehenga — photos, video and dates</span></h1>
+        <p><span class="t-hi">लहंगा पसंद करें, “तिथि देखें” दबाएँ — नीचे कैलेंडर में हरी तिथि खाली है।</span><span class="t-en">Pick a lehenga and tap “See dates” — a green date in the calendar below is free.</span></p>
+        <ol class="trail"><li class="is-on"><span class="t-hi">1 · चुनें</span><span class="t-en">1 · Choose</span></li><li><span class="t-hi">2 · तिथि</span><span class="t-en">2 · Date</span></li><li><span class="t-hi">3 · WhatsApp</span><span class="t-en">3 · WhatsApp</span></li></ol>
+      </section>
+      <section class="section">
+        <p class="focus-note" id="focus-note" hidden></p>
         <div class="leh-grid" id="lehenga-grid"></div>
-        <div class="glass leh-cal">
-          <div class="cal-head">
-            <button class="btn btn-glass btn-small" type="button" id="leh-prev" aria-label="Previous month">‹</button>
-            <strong id="leh-label"></strong>
-            <button class="btn btn-glass btn-small" type="button" id="leh-next" aria-label="Next month">›</button>
-          </div>
+        <div class="glass cal-card" id="leh-cal">
+          <h3><span class="t-hi">लहंगे की तिथियाँ</span><span class="t-en">Lehenga dates</span></h3>
           <p class="hint" id="leh-hint"></p>
+          <div class="leh-pick" id="leh-pick"></div>
+          <div class="cal-head">
+            <button class="btn btn-line" type="button" id="leh-prev" aria-label="Previous month">‹</button>
+            <strong id="leh-label"></strong>
+            <button class="btn btn-line" type="button" id="leh-next" aria-label="Next month">›</button>
+          </div>
           <div class="week" id="leh-week"></div>
           <div class="days" id="leh-days"></div>
           <p class="cal-legend">
-            <span class="dot dot-free"></span>
-            <span class="t-hi">खाली</span><span class="t-en">Free</span>
-            <span class="dot dot-busy"></span>
-            <span class="t-hi">भरी</span><span class="t-en">Taken</span>
+            <span><span class="dot dot-free"></span><span class="t-hi">खाली — दबाकर बुक करें</span><span class="t-en">Free — tap to book</span></span>
+            <span><span class="dot dot-busy"></span><span class="t-hi">भरी</span><span class="t-en">Taken</span></span>
           </p>
-        </div>
-        <div class="hero-cta">
-          <a class="btn btn-gold" href="book.html?type=lehenga">
-            <span class="t-hi">लहंगा बुकिंग खोलें</span>
-            <span class="t-en">Open lehenga booking</span>
-          </a>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <div>
-        <strong>Sparkle Makeover</strong>
-        <p>Orai · 285001</p>
-      </div>
-      <p class="fine">
-        <span class="t-hi">तिथि तब निश्चित है जब स्टूडियो WhatsApp पर पुष्टि करे।</span>
-        <span class="t-en">The date is fixed when the studio confirms it on WhatsApp.</span>
-      </p>
-      <p class="credit">
-        <span class="t-hi">Designed by <b>Vikram · OrbitCore</b></span>
-        <span class="t-en">Designed by <b>Vikram · OrbitCore</b></span>
-      </p>
-      <a class="btn btn-glass btn-small foot-login" href="admin.html">
-        <span class="t-hi">स्टूडियो लॉगिन</span>
-        <span class="t-en">Studio login</span>
-      </a>
-    </footer>
-
-    <div class="dock">
-      <a href="tel:+918081817807">
-        <span class="t-hi">कॉल</span>
-        <span class="t-en">Call</span>
-      </a>
-      <a href="book.html?type=lehenga">
-        <span class="t-hi">बुकिंग</span>
-        <span class="t-en">Book</span>
-      </a>
-    </div>
+    <div id="site-end"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
     <script src="config.js"></script>
