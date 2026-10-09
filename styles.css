@@ -127,13 +127,17 @@ main, .site-end { position: relative; z-index: 1; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0; }
 .brand img { width: 42px; height: 42px; border-radius: 50%; box-shadow: 0 4px 12px rgba(79, 20, 39, 0.35); }
 .brand strong { display: block; font-family: var(--script); font-weight: 400; font-size: 1.85rem; line-height: 0.9; color: var(--wine); }
-.brand small { display: block; font-size: 0.62rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold-lo); font-weight: 600; }
+.brand small { display: block; white-space: nowrap; font-size: 0.62rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--gold-lo); font-weight: 600; }
 .nav-links { display: none; gap: 4px; }
 .nav-links a { padding: 8px 14px; border-radius: 999px; text-decoration: none; font-weight: 500; color: var(--wine-2); transition: background 0.2s; }
 .nav-links a:hover { background: rgba(201, 161, 78, 0.14); }
 .nav-links a.is-on { background: var(--wine); color: var(--ivory); }
 .nav-actions { display: flex; align-items: center; gap: 6px; }
 .nav-actions .btn-small { min-height: 42px; padding: 0 16px; }
+@media (max-width: 400px) {
+  .brand small { letter-spacing: 0.16em; }
+  .nav-actions .btn-small { padding: 0 12px; font-size: 0.88rem; }
+}
 .lang, .menu-btn {
   display: grid;
   place-items: center;
@@ -251,7 +255,7 @@ main, .site-end { position: relative; z-index: 1; }
 .facts strong { display: block; font-family: var(--display); font-size: 1.8rem; line-height: 1; color: var(--gold-hi); }
 
 /* ---------- vanity mirror ---------- */
-.vanity { position: relative; display: grid; place-items: center; perspective: 1300px; padding: 20px 0 0; }
+.vanity { position: relative; display: grid; place-items: center; perspective: 1300px; padding: 10px 0 0; margin-bottom: -40px; }
 .vanity-scene {
   position: relative;
   display: grid;
@@ -262,7 +266,7 @@ main, .site-end { position: relative; z-index: 1; }
   animation: float 7s ease-in-out infinite;
 }
 @keyframes float { 50% { translate: 0 -8px; } }
-.mirror { position: relative; width: min(74vw, 380px); aspect-ratio: 4 / 5; }
+.mirror { position: relative; width: min(70vw, 380px); aspect-ratio: 4 / 5; }
 .mirror-frame {
   position: absolute;
   inset: 0;
@@ -326,8 +330,8 @@ main, .site-end { position: relative; z-index: 1; }
 }
 .counter::after { content: ""; position: absolute; left: 6%; right: 6%; top: 2px; height: 2px; background: var(--gold-grad); border-radius: 2px; opacity: 0.8; }
 .mirror-reflect {
-  width: min(74vw, 380px);
-  height: 90px;
+  width: min(70vw, 380px);
+  height: 70px;
   overflow: hidden;
   opacity: 0.22;
   transform: scaleY(-1);
@@ -642,25 +646,6 @@ button.day:not(:disabled):hover, a.day[href]:hover { transform: translateY(-2px)
 .visit-grid { display: grid; gap: 24px; max-width: 1180px; margin: 0 auto; }
 .map-wrap { position: relative; padding: 10px; border-radius: 30px; background: conic-gradient(from 210deg, #9b7027, #f8e7b2, #c9a14e, #fff2c9, #a8792c, #e8c97a, #9b7027); box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.7); }
 .map-wrap iframe { width: 100%; height: 360px; border: 0; border-radius: 22px; background: var(--blush); }
-.map-pin {
-  position: absolute;
-  left: 50%;
-  top: 22px;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px 8px 8px;
-  border-radius: 999px;
-  background: rgba(255, 250, 246, 0.95);
-  box-shadow: 0 12px 26px -10px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(201, 161, 78, 0.5);
-  color: var(--wine-2);
-  font-size: 0.86rem;
-  font-weight: 700;
-  white-space: nowrap;
-  pointer-events: none;
-}
-.map-pin img { width: 30px; height: 30px; border-radius: 50%; }
 .visit-card { display: grid; gap: 18px; padding: 24px 20px; border-radius: 28px; background: rgba(255, 244, 236, 0.07); box-shadow: inset 0 0 0 1px rgba(244, 222, 162, 0.28); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
 .visit-card h3 { font-size: 1.4rem; color: var(--gold-hi); }
 .addr { color: #fff6ee; font-size: 1.05rem; }
@@ -752,6 +737,7 @@ button.day:not(:disabled):hover, a.day[href]:hover { transform: translateY(-2px)
   .footer { padding-bottom: 36px; }
   .hero { grid-template-columns: 1.05fr 0.95fr; align-items: center; min-height: 92vh; padding-top: 120px; }
   .mirror, .mirror-reflect { width: 380px; }
+  .vanity { margin-bottom: 0; }
   .float-a { left: -60px; }
   .float-b { right: -60px; }
   .pkg-grid { grid-template-columns: repeat(3, 1fr); }

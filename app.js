@@ -313,7 +313,6 @@ function mountChrome() {
       <div class="visit-grid">
         <div class="map-wrap reveal">
           <iframe data-map title="Sparkle Makeover and Beauty Salon on the map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          <p class="map-pin"><img src="assets/logo.svg" alt="" width="30" height="30" /><span class="t-hi">Sparkle Makeover यहाँ है</span><span class="t-en">Sparkle Makeover is here</span></p>
         </div>
         <div class="visit-card reveal">
           <div>
@@ -392,12 +391,12 @@ function paintContact() {
   set("dir-en", (node) => { node.textContent = s.directions_en || s.directions_hi || "" })
   set("route-note", (node) => { node.hidden = !(s.directions_hi || s.directions_en) })
   const coords = pinCoords()
-  set("dir", (node) => { node.href = `https://www.google.com/maps/dir/?api=1&destination=${coords}&travelmode=driving` })
+  const place = encodeURIComponent("Sparkle Makeover and Beauty Salon, Orai")
+  set("dir", (node) => { node.href = `https://www.google.com/maps/dir/?api=1&destination=${place}&travelmode=driving` })
   const frame = $("[data-map]")
-  const nextSrc = `https://maps.google.com/maps?q=${coords}&z=18&hl=${lang()}&output=embed`
   if (frame && mapSrc !== coords) {
     mapSrc = coords
-    frame.src = nextSrc
+    frame.src = `https://maps.google.com/maps?q=${place}&ll=${coords}&z=17&output=embed`
   }
 }
 
@@ -565,6 +564,7 @@ function renderPackages() {
   const lehengaTab = $("#mode-lehenga")
   if (bridalTab) bridalTab.classList.toggle("is-on", state.btype === "bridal")
   if (lehengaTab) lehengaTab.classList.toggle("is-on", state.btype === "lehenga")
+  observeReveals()
 }
 
 function lehMedia(item) {
@@ -666,6 +666,7 @@ function renderLehenga() {
     setTimeout(() => document.getElementById(`leh-${focusItem.id}`)?.scrollIntoView({ behavior: "smooth", block: "start" }), 250)
   }
   renderLehCalendar()
+  observeReveals()
 }
 
 function renderLehCalendar() {
