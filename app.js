@@ -339,7 +339,7 @@ function mountChrome() {
     </section>
     <footer class="footer">
       <div class="footer-inner">
-        <a class="brand" href="index.html"><img src="assets/logo.svg" alt="" width="42" height="42" /><span><strong>Sparkle</strong><small>Makeover · Orai</small></span></a>
+        <a class="brand" href="index.html"><img src="assets/logo.svg?v=20261009c" alt="" width="42" height="42" /><span><strong>Sparkle</strong><small>Makeover · Orai</small></span></a>
         <nav class="foot-links" aria-label="Footer">
           <a href="packages.html"><span class="t-hi">ब्राइडल पैकेज</span><span class="t-en">Bridal packages</span></a>
           <a href="lehenga.html"><span class="t-hi">लहंगा</span><span class="t-en">Lehenga</span></a>
@@ -400,6 +400,23 @@ function paintContact() {
   }
 }
 
+function countUp(node) {
+  if (node.dataset.done) return
+  node.dataset.done = "1"
+  const target = Number(node.dataset.count)
+  const decimals = Number(node.dataset.decimals || 0)
+  const suffix = node.dataset.suffix || ""
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+  const start = performance.now()
+  const step = (now) => {
+    const p = Math.min(1, (now - start) / 1600)
+    const eased = 1 - Math.pow(1 - p, 3)
+    node.textContent = `${(target * eased).toFixed(decimals)}${suffix}`
+    if (p < 1) requestAnimationFrame(step)
+  }
+  requestAnimationFrame(step)
+}
+
 let revealer = null
 function observeReveals() {
   const nodes = document.querySelectorAll(".reveal:not(.is-in)")
@@ -412,6 +429,7 @@ function observeReveals() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-in")
+          entry.target.querySelectorAll("[data-count]").forEach(countUp)
           revealer.unobserve(entry.target)
         }
       })
