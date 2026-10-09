@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lehenga with dates | Sparkle Makeover, Orai</title>
+    <meta name="description" content="Sparkle Makeover lehenga collection with photos, videos, and a live booking calendar." />
+    <meta name="theme-color" content="#faf5ec" />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,520;0,9..144,640;1,9..144,520&family=Noto+Sans+Devanagari:wght@400;500;600&family=Outfit:wght@340;460;560&family=Tiro+Devanagari+Hindi&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#lehenga-grid">
+      <span class="t-hi">लहंगे पर जाएँ</span>
+      <span class="t-en">Skip to lehengas</span>
+    </a>
+    <canvas class="dust" aria-hidden="true"></canvas>
+
+    <header class="nav" data-nav>
+      <a class="brand" href="index.html">
+        <img src="assets/logo.svg" alt="Sparkle Makeover logo" width="44" height="44" />
+        <span>
+          <strong>Sparkle</strong>
+          <small>Makeover · Orai</small>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Sections">
+        <a href="index.html"><span class="t-hi">होम</span><span class="t-en">Home</span></a>
+        <a href="packages.html"><span class="t-hi">पैकेज</span><span class="t-en">Packages</span></a>
+        <a href="lehenga.html" class="is-on"><span class="t-hi">लहंगा</span><span class="t-en">Lehenga</span></a>
+        <a href="visit.html"><span class="t-hi">स्टूडियो</span><span class="t-en">Studio</span></a>
+      </nav>
+      <div class="nav-actions">
+        <button class="lang" type="button" data-lang-toggle aria-label="Language">
+          <span data-lang-label>EN</span>
+        </button>
+        <a class="btn btn-gold btn-small" href="book.html">
+          <span class="t-hi">बुक करें</span>
+          <span class="t-en">Book</span>
+        </a>
+        <button class="menu-btn" type="button" data-menu-btn aria-expanded="false" aria-controls="sheet">
+          <span></span><span></span>
+          <span class="sr-only t-hi">मेनू</span>
+          <span class="sr-only t-en">Menu</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="sheet" id="sheet" hidden>
+      <a href="index.html" data-sheet-link><span class="t-hi">होम</span><span class="t-en">Home</span></a>
+      <a href="packages.html" data-sheet-link><span class="t-hi">ब्राइडल पैकेज</span><span class="t-en">Bridal packages</span></a>
+      <a href="lehenga.html" data-sheet-link><span class="t-hi">लहंगा</span><span class="t-en">Lehenga</span></a>
+      <a href="visit.html" data-sheet-link><span class="t-hi">पता और समय</span><span class="t-en">Address and hours</span></a>
+      <a href="book.html" data-sheet-link><span class="t-hi">बुकिंग</span><span class="t-en">Booking</span></a>
+    </div>
+
+    <main id="main">
+      <div class="page-hero">
+        <p class="kicker">
+          <span class="t-hi">कदम 1–2 · चुनें और तिथि देखें</span>
+          <span class="t-en">Steps 1–2 · Choose and see dates</span>
+        </p>
+        <h1>
+          <span class="t-hi">लहंगा — फ़ोटो, वीडियो और तिथि</span>
+          <span class="t-en">Lehenga — photos, video, and dates</span>
+        </h1>
+        <p>
+          <span class="t-hi">पहले लहंगा चुनें, फिर नीचे कैलेंडर में तिथि देखें। जिस तिथि पर निशान है, वह उस लहंगे के लिए भरी है।</span>
+          <span class="t-en">Choose the lehenga first, then see the date in the calendar below. A marked date is taken for that lehenga.</span>
+        </p>
+      </div>
+      <section class="section" style="padding-top: 12px">
+        <div class="leh-grid" id="lehenga-grid"></div>
+        <div class="glass leh-cal">
+          <div class="cal-head">
+            <button class="btn btn-glass btn-small" type="button" id="leh-prev" aria-label="Previous month">‹</button>
+            <strong id="leh-label"></strong>
+            <button class="btn btn-glass btn-small" type="button" id="leh-next" aria-label="Next month">›</button>
+          </div>
+          <p class="hint" id="leh-hint"></p>
+          <div class="week" id="leh-week"></div>
+          <div class="days" id="leh-days"></div>
+          <p class="cal-legend">
+            <span class="dot dot-free"></span>
+            <span class="t-hi">खाली</span><span class="t-en">Free</span>
+            <span class="dot dot-busy"></span>
+            <span class="t-hi">भरी</span><span class="t-en">Taken</span>
+          </p>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-gold" href="book.html?type=lehenga">
+            <span class="t-hi">लहंगा बुकिंग खोलें</span>
+            <span class="t-en">Open lehenga booking</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <strong>Sparkle Makeover</strong>
+        <p>Orai · 285001</p>
+      </div>
+      <p class="fine">
+        <span class="t-hi">तिथि तब निश्चित है जब स्टूडियो WhatsApp पर पुष्टि करे।</span>
+        <span class="t-en">The date is fixed when the studio confirms it on WhatsApp.</span>
+      </p>
+      <p class="credit">
+        <span class="t-hi">Designed by <b>Vikram · OrbitCore</b></span>
+        <span class="t-en">Designed by <b>Vikram · OrbitCore</b></span>
+      </p>
+      <a class="btn btn-glass btn-small foot-login" href="admin.html">
+        <span class="t-hi">स्टूडियो लॉगिन</span>
+        <span class="t-en">Studio login</span>
+      </a>
+    </footer>
+
+    <div class="dock">
+      <a href="tel:+918081817807">
+        <span class="t-hi">कॉल</span>
+        <span class="t-en">Call</span>
+      </a>
+      <a href="book.html?type=lehenga">
+        <span class="t-hi">बुकिंग</span>
+        <span class="t-en">Book</span>
+      </a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.4/dist/umd/supabase.js"></script>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

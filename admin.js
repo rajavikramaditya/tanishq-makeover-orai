@@ -56,6 +56,7 @@ const TEXT = {
     noteHi: "विवरण, हिन्दी",
     noteEn: "विवरण, English",
     newPackage: "नया पैकेज",
+    refVideo: "संदर्भ वीडियो लिंक",
     tag: "टैग नंबर",
     photo: "फ़ोटो",
     video: "वीडियो",
@@ -150,6 +151,7 @@ const TEXT = {
     noteHi: "Detail, Hindi",
     noteEn: "Detail, English",
     newPackage: "New package",
+    refVideo: "Reference video link",
     tag: "Tag number",
     photo: "Photo",
     video: "Video",
@@ -454,6 +456,7 @@ function packageForm(service) {
       <label>${esc(a("noteHi"))}<input name="note_hi" value="${esc(service?.note_hi || "")}" /></label>
       <label>${esc(a("noteEn"))}<input name="note_en" value="${esc(service?.note_en || "")}" /></label>
       <label>${esc(a("price"))}<input name="price_inr" type="number" min="0" value="${service?.price_inr ?? ""}" /></label>
+      <label>${esc(a("refVideo"))}<input name="ref_video_url" type="url" inputmode="url" placeholder="https://" value="${esc(service?.ref_video_url || "")}" /></label>
       <label><input name="active" type="checkbox" ${service?.active !== false ? "checked" : ""}/> ${esc(a("active"))}</label>
     </div>
     <button class="gold" type="submit">${esc(a("save"))}</button>
@@ -636,6 +639,7 @@ async function onSubmit(event) {
         note_hi: data.note_hi || "",
         note_en: data.note_en || "",
         price_inr: numOrNull(data.price_inr),
+        ref_video_url: (data.ref_video_url || "").trim(),
         category: "bridal",
         group_key: "bridal",
         active: form.querySelector('[name="active"]').checked,

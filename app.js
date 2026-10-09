@@ -31,8 +31,10 @@ const FALLBACK_PACKAGES = [
   ["family", "परिवार ग्लैम", "Family glam", "माता, बहन और अतिथियों की एक साथ सज्जा।", "Mothers, sisters, and guests, prepared together.", null, 11],
   ["shoot", "फोटोशूट", "Photoshoot", "चित्रण के लिए रूप। छायाचित्र अलग से निर्धारित होता है।", "A look built for the camera. Photography is arranged separately.", null, 12],
 ].map(([id, name_hi, name_en, note_hi, note_en, price_inr, sort_order]) => ({
-  id, category: "bridal", group_key: "bridal", name_hi, name_en, note_hi, note_en, price_inr, sort_order, active: true,
+  id, category: "bridal", group_key: "bridal", name_hi, name_en, note_hi, note_en, price_inr, sort_order, active: true, ref_video_url: "",
 }))
+
+const REEL_URL = "https://www.instagram.com/reel/DdlPSdwzWzT/"
 
 const WHO = [
   { id: "self", hi: "स्वयं के लिए", en: "For myself" },
@@ -57,6 +59,7 @@ const COPY = {
     quote: "परामर्श पर",
     askPackage: "इस पैकेज की तिथि माँगें",
     askLehenga: "इस तिथि को माँगें",
+    refVideo: "संदर्भ वीडियो देखें",
     taken: "भरी",
     free: "खाली",
     packageTitle: "कौन सा पैकेज?",
@@ -64,7 +67,7 @@ const COPY = {
     lehengaTitle: "कौन सा लहंगा?",
     lehengaHint: "टैग नंबर के साथ चुनें। तिथि अगले कदम पर।",
     dateTitle: "कौन सी तिथि उपयुक्त है?",
-    dateHintBridal: "आज से साठ दिन के भीतर। भरी हुई तिथि पर हर समय बंद दिखेगा।",
+    dateHintBridal: "यह ब्राइडल पैकेज बुकिंग का कैलेंडर है। आज से साठ दिन के भीतर चुनें — भरी तिथि पर हर समय बंद दिखेगा।",
     dateHintLehenga: "आज से साठ दिन के भीतर। निशान वाली तिथि इस लहंगे के लिए भरी है।",
     slotTitle: "दिन का कौन सा भाग?",
     slotHint: "भरा हुआ समय बंद है। सटीक समय पुष्टि के बाद निश्चित होता है।",
@@ -101,6 +104,7 @@ const COPY = {
     quote: "On consultation",
     askPackage: "Ask for this package",
     askLehenga: "Ask for this date",
+    refVideo: "Watch reference video",
     taken: "Taken",
     free: "Free",
     packageTitle: "Which package?",
@@ -108,7 +112,7 @@ const COPY = {
     lehengaTitle: "Which lehenga?",
     lehengaHint: "Choose with the tag number. The date comes next.",
     dateTitle: "Which date suits you?",
-    dateHintBridal: "Any day in the next sixty days. A full date shows every time as taken.",
+    dateHintBridal: "This calendar is for bridal package booking. Pick within sixty days — a full date shows every time as taken.",
     dateHintLehenga: "Any day in the next sixty days. A marked date is taken for this lehenga.",
     slotTitle: "Which part of the day?",
     slotHint: "Taken times are closed. The studio confirms the exact hour.",
@@ -178,6 +182,11 @@ function iso(date) {
   const day = String(date.getDate()).padStart(2, "0")
   return `${date.getFullYear()}-${month}-${day}`
 }
+function parseDate(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(value || ""))) return null
+  const date = new Date(`${value}T00:00:00`)
+  return Number.isNaN(date.getTime()) ? null : date
+}
 function packageById(id) {
   return state.packages.find((item) => item.id === id)
 }
@@ -233,27 +242,8 @@ function applyLang(next) {
   renderAll()
 }
 
-function goBook() {
-  const book = $(".book")
-  if (book) book.classList.remove("is-done")
-  const success = $("#success")
-  if (success) success.hidden = true
-  renderAll()
-  $("#book").scrollIntoView({ behavior: "smooth", block: "start" })
-}
-
-function choosePackage(item) {
-  state.btype = "bridal"
-  state.service = item.id
-  state.step = 1
-  goBook()
-}
-
-function chooseLehenga(id) {
-  state.btype = "lehenga"
-  state.lehenga = id
-  state.step = 1
-  goBook()
+function bookUrl(params) {
+  return `book.html?${new URLSearchParams(params).toString()}`
 }
 
 function renderAll() {
@@ -263,44 +253,67 @@ function renderAll() {
   paintContact()
 }
 
-function renderPackages() {
-  const list = $("#package-list")
-  if (!list) return
+function packageCard(item, index) {
   const copy = t()
-  list.replaceChildren()
-  state.packages
-    .filter((item) => item.active !== false)
-    .sort((a, b) => a.sort_order - b.sort_order)
-    .forEach((item, index) => {
-      const plate = document.createElement("article")
-      plate.className = "plate reveal" + (state.btype === "bridal" && state.service === item.id ? " is-on" : "")
-      plate.style.animationDelay = `${Math.min(index, 8) * 60}ms`
-      const number = document.createElement("span")
-      number.className = "plate-no"
-      number.textContent = String(index + 1).padStart(2, "0")
-      const copyBlock = document.createElement("div")
-      const title = document.createElement("h3")
-      title.textContent = field(item, "name")
-      const note = document.createElement("p")
-      note.textContent = field(item, "note")
-      copyBlock.append(title, note)
-      const end = document.createElement("div")
-      end.className = "plate-end"
-      const price = document.createElement("em")
-      price.textContent = money(item.price_inr)
-      const button = document.createElement("button")
-      button.type = "button"
-      button.className = "btn btn-gold btn-small"
-      button.textContent = copy.askPackage
-      button.addEventListener("click", () => choosePackage(item))
-      end.append(price, button)
-      plate.append(number, copyBlock, end)
-      list.append(plate)
-    })
+  const plate = document.createElement("article")
+  plate.className = "plate reveal"
+  plate.style.animationDelay = `${Math.min(index, 8) * 60}ms`
+  const number = document.createElement("span")
+  number.className = "plate-no"
+  number.textContent = String(index + 1).padStart(2, "0")
+  const copyBlock = document.createElement("div")
+  const title = document.createElement("h3")
+  title.textContent = field(item, "name")
+  const note = document.createElement("p")
+  note.textContent = field(item, "note")
+  copyBlock.append(title, note)
+  const media = document.createElement("div")
+  media.className = "pkg-media"
+  const videoUrl = item.ref_video_url || REEL_URL
+  const ref = document.createElement("a")
+  ref.className = "ref-video"
+  ref.href = videoUrl
+  ref.target = "_blank"
+  ref.rel = "noopener noreferrer"
+  ref.textContent = copy.refVideo
+  media.append(ref)
+  const end = document.createElement("div")
+  end.className = "plate-end"
+  const price = document.createElement("em")
+  price.textContent = money(item.price_inr)
+  const button = document.createElement("a")
+  button.className = "btn btn-gold btn-small"
+  button.href = bookUrl({ type: "bridal", service: item.id })
+  button.textContent = copy.askPackage
+  end.append(price, button)
+  plate.append(number, copyBlock, media, end)
+  return plate
+}
+
+function renderPackages() {
+  const copy = t()
+  const full = $("#package-list")
+  if (full) {
+    full.replaceChildren()
+    state.packages
+      .filter((item) => item.active !== false)
+      .sort((a, b) => a.sort_order - b.sort_order)
+      .forEach((item, index) => full.append(packageCard(item, index)))
+  }
+  const preview = $("#package-preview")
+  if (preview) {
+    preview.replaceChildren()
+    state.packages
+      .filter((item) => item.active !== false)
+      .sort((a, b) => a.sort_order - b.sort_order)
+      .slice(0, 3)
+      .forEach((item, index) => preview.append(packageCard(item, index)))
+  }
   const bridalTab = $("#mode-bridal")
   const lehengaTab = $("#mode-lehenga")
   if (bridalTab) bridalTab.classList.toggle("is-on", state.btype === "bridal")
   if (lehengaTab) lehengaTab.classList.toggle("is-on", state.btype === "lehenga")
+  void copy
 }
 
 function lehMedia(item) {
@@ -322,7 +335,7 @@ function renderLehenga() {
   }
   state.lehengas.forEach((item, index) => {
     const card = document.createElement("article")
-    card.className = "plate leh-card reveal" + (state.btype === "lehenga" && state.lehenga === item.id ? " is-on" : "")
+    card.className = "plate leh-card reveal"
     card.style.animationDelay = `${Math.min(index, 8) * 60}ms`
     const media = lehMedia(item)
     const frame = document.createElement("div")
@@ -356,11 +369,10 @@ function renderLehenga() {
     badge.textContent = bookedHere
       ? `${copy.booked}`
       : (item.status === "available" ? copy.available : copy.taken)
-    const button = document.createElement("button")
-    button.type = "button"
+    const button = document.createElement("a")
     button.className = "btn btn-gold btn-small"
+    button.href = bookUrl({ type: "lehenga", lehenga: item.id })
     button.textContent = copy.askLehenga
-    button.addEventListener("click", () => chooseLehenga(item.id))
     body.append(tag, title, badge, button)
     card.append(frame, body)
     grid.append(card)
@@ -397,28 +409,21 @@ function renderLehCalendar() {
   for (let i = 0; i < pad; i += 1) days.append(document.createElement("span"))
   for (let day = 1; day <= count; day += 1) {
     const date = new Date(first.getFullYear(), first.getMonth(), day)
-    const button = document.createElement("button")
-    button.type = "button"
+    const button = document.createElement("a")
     button.className = "day"
     button.textContent = String(day)
     const off = startOfDay(date) < today || startOfDay(date) > max
-    button.disabled = off
-    if (sameDay(date, today)) button.classList.add("is-today")
-    if (sameDay(date, state.date) && state.btype === "lehenga") button.classList.add("is-on")
     const busy = current && !off && isLehTaken(current.id, date)
     if (busy) {
       button.classList.add("is-busy")
       button.title = copy.taken
+      button.removeAttribute("href")
     } else if (!off) {
       button.classList.add("is-free")
+      if (current) button.href = bookUrl({ type: "lehenga", lehenga: current.id, date: iso(date) })
+    } else {
+      button.style.opacity = "0.35"
     }
-    button.addEventListener("click", () => {
-      state.btype = "lehenga"
-      if (current) state.lehenga = current.id
-      state.date = date
-      state.step = 2
-      goBook()
-    })
     days.append(button)
   }
 }
@@ -437,8 +442,10 @@ function paintContact() {
   }
   const hours = $("#hours-block")
   if (hours && state.settings.hours_hi) {
-    hours.querySelector(".t-hi").textContent = state.settings.hours_hi
-    hours.querySelector(".t-en").textContent = state.settings.hours_en || state.settings.hours_hi
+    const hi = hours.querySelector(".t-hi")
+    const en = hours.querySelector(".t-en")
+    if (hi) hi.textContent = state.settings.hours_hi
+    if (en) en.textContent = state.settings.hours_en || state.settings.hours_hi
   }
 }
 
@@ -451,13 +458,14 @@ function captureGuest() {
 }
 
 function renderWizard() {
-  captureGuest()
   const wizard = $("#wizard")
+  if (!wizard) return
+  captureGuest()
   const rail = $("#rail")
   const book = $(".book")
   const next = $("#next-btn")
   const back = $("#back-btn")
-  if (!wizard || !book || book.classList.contains("is-done")) return
+  if (!book || book.classList.contains("is-done")) return
   const copy = t()
   const L = lang()
   rail.replaceChildren()
@@ -502,8 +510,6 @@ function renderWizard() {
     en.textContent = COPY.en.next
   }
   $("#form-error").textContent = ""
-  renderPackages()
-  renderLehenga()
 }
 
 function packageStep(copy) {
@@ -547,7 +553,6 @@ function lehengaPickStep(copy) {
     button.addEventListener("click", () => {
       state.lehenga = item.id
       renderWizard()
-      renderLehenga()
     })
     picks.append(button)
   })
@@ -856,8 +861,7 @@ async function sendRequest() {
 }
 
 function resetBooking() {
-  state.step = 0
-  state.service = null
+  state.step = state.btype === "bridal" ? (state.service ? 1 : 0) : (state.lehenga ? 1 : 0)
   state.date = null
   state.slot = null
   state.who = "self"
@@ -882,8 +886,10 @@ async function refreshOccupied() {
   })
   if (error || !data) return
   state.occupied = new Set(data.map((row) => `${String(row.day).slice(0, 10)}|${row.slot}`))
-  const book = $(".book")
-  if (book && !book.classList.contains("is-done") && state.btype === "bridal" && (state.step === 1 || state.step === 2)) renderWizard()
+  if ($("#wizard") && state.btype === "bridal" && (state.step === 1 || state.step === 2)) {
+    const book = $(".book")
+    if (book && !book.classList.contains("is-done")) renderWizard()
+  }
 }
 
 async function refreshLehenga() {
@@ -901,8 +907,10 @@ async function refreshLehenga() {
     state.lehTaken = new Set(cal.data.map((row) => `${row.lehenga_id}|${String(row.day).slice(0, 10)}`))
   }
   renderLehenga()
-  const book = $(".book")
-  if (book && !book.classList.contains("is-done") && state.btype === "lehenga" && state.step === 1) renderWizard()
+  if ($("#wizard") && state.btype === "lehenga" && state.step === 1) {
+    const book = $(".book")
+    if (book && !book.classList.contains("is-done")) renderWizard()
+  }
 }
 
 async function loadStudio() {
@@ -911,16 +919,47 @@ async function loadStudio() {
     return
   }
   const [services, slots, settings] = await Promise.all([
-    db.from("services").select("id,category,group_key,name_hi,name_en,note_hi,note_en,price_inr,sort_order,active").eq("category", "bridal").eq("active", true).order("sort_order"),
+    db.from("services").select("id,category,group_key,name_hi,name_en,note_hi,note_en,price_inr,sort_order,active,ref_video_url").eq("category", "bridal").eq("active", true).order("sort_order"),
     db.from("time_slots").select("id,label_hi,label_en,starts,ends,sort_order,active").eq("active", true).order("sort_order"),
     db.from("studio_settings").select("whatsapp,phone_main,email,facebook,instagram,hours_hi,hours_en").limit(1),
   ])
   if (services.data?.length) state.packages = services.data
   if (slots.data?.length) state.slots = slots.data
   if (settings.data?.[0]) state.settings = { ...state.settings, ...settings.data[0] }
+  applyBookParams()
   renderAll()
   refreshOccupied()
   refreshLehenga()
+}
+
+function applyBookParams() {
+  if (!$("#wizard") || !window.URLSearchParams) return
+  const params = new URLSearchParams(location.search)
+  const type = params.get("type")
+  if (type === "lehenga") state.btype = "lehenga"
+  else if (type === "bridal") state.btype = "bridal"
+  const service = params.get("service")
+  if (service && packageById(service)) {
+    state.service = service
+    state.step = 1
+  }
+  const lehenga = params.get("lehenga")
+  if (lehenga) {
+    state.lehenga = lehenga
+    state.step = 1
+  }
+  const date = parseDate(params.get("date"))
+  if (date) {
+    const today = startOfDay(new Date())
+    if (startOfDay(date) >= today && startOfDay(date) <= addDays(today, 60)) {
+      state.date = date
+      state.view = startOfMonth(date)
+      state.lehView = startOfMonth(date)
+      state.step = state.btype === "bridal" ? 2 : 2
+      if (state.btype === "bridal" && !state.service) state.step = 1
+      if (state.btype === "lehenga" && !lehengaById(state.lehenga)) state.step = 0
+    }
+  }
 }
 
 function bindChrome() {
@@ -929,95 +968,78 @@ function bindChrome() {
   })()
   applyLang(saved === "en" ? "en" : "hi")
 
-  $("[data-lang-toggle]").addEventListener("click", () => {
+  const toggle = $("[data-lang-toggle]")
+  if (toggle) toggle.addEventListener("click", () => {
     applyLang(lang() === "hi" ? "en" : "hi")
   })
-  $("#mode-bridal").addEventListener("click", () => {
+
+  const modeBridal = $("#mode-bridal")
+  if (modeBridal) modeBridal.addEventListener("click", () => {
     state.btype = "bridal"
     if (!packageById(state.service)) state.service = null
-    state.step = 0
+    state.step = state.service ? 1 : 0
     renderWizard()
   })
-  $("#mode-lehenga").addEventListener("click", () => {
+  const modeLehenga = $("#mode-lehenga")
+  if (modeLehenga) modeLehenga.addEventListener("click", () => {
     state.btype = "lehenga"
     if (!lehengaById(state.lehenga)) state.lehenga = state.lehengas[0]?.id || null
-    state.step = 0
+    state.step = state.lehenga ? 1 : 0
     renderWizard()
   })
-  $("#leh-prev").addEventListener("click", () => {
+  const lehPrev = $("#leh-prev")
+  if (lehPrev) lehPrev.addEventListener("click", () => {
     state.lehView = new Date(state.lehView.getFullYear(), state.lehView.getMonth() - 1, 1)
     renderLehCalendar()
   })
-  $("#leh-next").addEventListener("click", () => {
+  const lehNext = $("#leh-next")
+  if (lehNext) lehNext.addEventListener("click", () => {
     state.lehView = new Date(state.lehView.getFullYear(), state.lehView.getMonth() + 1, 1)
     renderLehCalendar()
   })
 
   const sheet = $("#sheet")
   const menu = $("[data-menu-btn]")
-  menu.addEventListener("click", () => {
-    const open = sheet.hasAttribute("hidden")
-    sheet.toggleAttribute("hidden", !open)
-    menu.setAttribute("aria-expanded", open ? "true" : "false")
-  })
-  document.querySelectorAll("[data-sheet-link]").forEach((link) => {
-    link.addEventListener("click", () => {
-      sheet.hidden = true
-      menu.setAttribute("aria-expanded", "false")
+  if (sheet && menu) {
+    menu.addEventListener("click", () => {
+      const open = sheet.hasAttribute("hidden")
+      sheet.toggleAttribute("hidden", !open)
+      menu.setAttribute("aria-expanded", open ? "true" : "false")
     })
-  })
-
-  const nav = $("[data-nav]")
-  const line = $(".scroll-line")
-  const onScroll = () => {
-    nav.classList.toggle("is-stuck", window.scrollY > 8)
-    const height = document.documentElement.scrollHeight - window.innerHeight
-    if (line && height > 0) line.style.transform = `scaleX(${window.scrollY / height})`
+    document.querySelectorAll("[data-sheet-link]").forEach((link) => {
+      link.addEventListener("click", () => {
+        sheet.hidden = true
+        menu.setAttribute("aria-expanded", "false")
+      })
+    })
   }
-  onScroll()
-  window.addEventListener("scroll", onScroll, { passive: true })
 
   const glow = $(".cursor-glow")
   const fine = window.matchMedia("(pointer: fine)").matches
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  if (fine && !reduce) {
-    document.body.classList.add("has-pointer")
-    window.addEventListener("pointermove", (event) => {
-      glow.style.left = `${event.clientX}px`
-      glow.style.top = `${event.clientY}px`
+  const stage = $("[data-slab]")
+  if (fine && !reduce && stage) {
+    stage.addEventListener("pointermove", (event) => {
+      const rect = stage.getBoundingClientRect()
+      const x = (event.clientX - rect.left) / rect.width - 0.5
+      const y = (event.clientY - rect.top) / rect.height - 0.5
+      stage.style.setProperty("--ry", `${x * -18}deg`)
+      stage.style.setProperty("--rx", `${5 + y * -10}deg`)
     })
-    const stage = $("[data-slab]")
-    if (stage) {
-      stage.addEventListener("pointermove", (event) => {
-        const rect = stage.getBoundingClientRect()
-        const x = (event.clientX - rect.left) / rect.width - 0.5
-        const y = (event.clientY - rect.top) / rect.height - 0.5
-        stage.style.setProperty("--ry", `${x * -18}deg`)
-        stage.style.setProperty("--rx", `${8 + y * -12}deg`)
-      })
-      stage.addEventListener("pointerleave", () => {
-        stage.style.removeProperty("--ry")
-        stage.style.removeProperty("--rx")
-      })
-    }
-    document.querySelectorAll(".btn-gold").forEach((button) => {
-      button.addEventListener("pointermove", (event) => {
-        const rect = button.getBoundingClientRect()
-        const x = event.clientX - (rect.left + rect.width / 2)
-        const y = event.clientY - (rect.top + rect.height / 2)
-        button.style.transform = `translate(${x * 0.12}px, ${y * 0.18}px)`
-      })
-      button.addEventListener("pointerleave", () => {
-        button.style.transform = ""
-      })
+    stage.addEventListener("pointerleave", () => {
+      stage.style.removeProperty("--ry")
+      stage.style.removeProperty("--rx")
     })
   }
+  void glow
 
-  $("#back-btn").addEventListener("click", () => {
+  const backBtn = $("#back-btn")
+  if (backBtn) backBtn.addEventListener("click", () => {
     state.step = Math.max(0, state.step - 1)
     renderWizard()
   })
-  $("#next-btn").addEventListener("click", () => {
+  const nextBtn = $("#next-btn")
+  if (nextBtn) nextBtn.addEventListener("click", () => {
     const error = validate()
     if (error) {
       showError(error)
@@ -1030,7 +1052,8 @@ function bindChrome() {
     }
     sendRequest()
   })
-  $("#reset-btn").addEventListener("click", resetBooking)
+  const resetBtn = $("#reset-btn")
+  if (resetBtn) resetBtn.addEventListener("click", resetBooking)
 
   mountDust()
   loadStudio()
@@ -1044,17 +1067,15 @@ function mountDust() {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   if (reduce) return
   const ctx = canvas.getContext("2d", { alpha: true })
-  const specks = Array.from({ length: 64 }, () => ({
+  const specks = Array.from({ length: 44 }, () => ({
     x: Math.random(),
     y: Math.random(),
-    r: 0.4 + Math.random() * 1.8,
-    v: 0.015 + Math.random() * 0.04,
-    o: 0.15 + Math.random() * 0.5,
+    r: 0.6 + Math.random() * 2,
+    v: 0.01 + Math.random() * 0.03,
+    o: 0.12 + Math.random() * 0.3,
     drift: Math.random() * Math.PI * 2,
     tw: 0.4 + Math.random() * 1.2,
   }))
-  let pointerX = 0.5
-  let pointerY = 0.4
   let running = true
 
   function resize() {
@@ -1072,10 +1093,10 @@ function mountDust() {
       speck.y -= speck.v / 100
       if (speck.y < -0.02) speck.y = 1.02
       const sparkle = 0.55 + 0.45 * Math.sin(now / 700 * speck.tw + speck.drift)
-      const x = speck.x * width + Math.sin(now / 900 + speck.drift) * 10 + (pointerX - 0.5) * 16
-      const y = speck.y * height + (pointerY - 0.5) * 10
+      const x = speck.x * width + Math.sin(now / 900 + speck.drift) * 10
+      const y = speck.y * height
       ctx.beginPath()
-      ctx.fillStyle = `rgba(246,228,194,${speck.o * sparkle})`
+      ctx.fillStyle = `rgba(169,124,51,${speck.o * sparkle})`
       ctx.arc(x, y, speck.r, 0, Math.PI * 2)
       ctx.fill()
     })
@@ -1083,10 +1104,6 @@ function mountDust() {
   }
   resize()
   window.addEventListener("resize", resize)
-  window.addEventListener("pointermove", (event) => {
-    pointerX = event.clientX / window.innerWidth
-    pointerY = event.clientY / window.innerHeight
-  })
   document.addEventListener("visibilitychange", () => {
     const was = running
     running = document.visibilityState === "visible"
