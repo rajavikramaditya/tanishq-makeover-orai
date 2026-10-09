@@ -113,7 +113,9 @@ textarea { min-height: 80px; }
 }
 .grid-2 { display: grid; gap: 10px; }
 .lehenga-grid { display: grid; gap: 12px; }
-.lehenga img { width: 100%; height: 220px; object-fit: cover; border-radius: 16px; background: #1b1016; }
+.lehenga img, .lehenga video { width: 100%; border-radius: 16px; background: #1b1016; }
+.lehenga img { height: 220px; object-fit: cover; }
+.lehenga video { max-height: 320px; }
 .tag {
   font-family: var(--serif);
   font-size: 1.4rem;

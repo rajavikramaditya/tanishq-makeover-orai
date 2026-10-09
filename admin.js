@@ -9,16 +9,15 @@ const TEXT = {
     logout: "निकास",
     overview: "सार",
     calendar: "पंचांग",
-    services: "सेवाएँ",
+    packages: "पैकेज",
     lehenga: "लहंगा",
-    gifts: "उपहार",
-    academy: "प्रशिक्षण",
     settings: "सेटिंग",
-    pending: "अनुरोध",
+    pending: "ब्राइडल अनुरोध",
     today: "आज",
     wardrobe: "बुक लहंगे",
-    learners: "सीख रहे हैं",
-    upcoming: "आने वाली नियुक्तियाँ",
+    lehRequests: "लहंगा अनुरोध",
+    upcomingBridal: "आने वाली ब्राइडल बुकिंग",
+    upcomingLehenga: "आने वाले लहंगा अनुरोध",
     none: "अभी कुछ नहीं।",
     closeDay: "खाली समय बंद करें",
     openDay: "बंद समय खोलें",
@@ -28,7 +27,7 @@ const TEXT = {
     phone: "मोबाइल",
     note: "टिप्पणी",
     amount: "राशि",
-    service: "सेवा",
+    service: "पैकेज",
     forWhom: "किसके लिए",
     status: "स्थिति",
     paid: "भुगतान",
@@ -49,8 +48,6 @@ const TEXT = {
     taken: "यह समय भर चुका है।",
     saved: "सहेज लिया।",
     failed: "सहेजा नहीं जा सका।",
-    bridal: "ब्राइडल",
-    salon: "सैलून",
     price: "शुल्क (खाली = परामर्श)",
     active: "दिखाएँ",
     add: "जोड़ें",
@@ -58,10 +55,11 @@ const TEXT = {
     nameEn: "नाम, English",
     noteHi: "विवरण, हिन्दी",
     noteEn: "विवरण, English",
-    group: "समूह",
-    newService: "नई सेवा",
+    newPackage: "नया पैकेज",
     tag: "टैग नंबर",
     photo: "फ़ोटो",
+    video: "वीडियो",
+    removeVideo: "वीडियो हटाएँ",
     title: "नाम",
     client: "ग्राहक",
     clientPhone: "ग्राहक का मोबाइल",
@@ -70,30 +68,17 @@ const TEXT = {
     booked: "बुक",
     returned: "लौटा",
     hold: "रोका",
-    send: "व्हाट्सऐप पर भेजें",
+    send: "WhatsApp पर भेजें",
     remove: "हटाएँ",
     newLehenga: "नया लहंगा",
-    newBook: "नई पुस्तिका",
-    product: "वस्तु",
-    total: "कुल",
-    used: "उपयोग",
-    left: "शेष",
-    low: "कम शेष",
-    course: "पाठ्यक्रम",
-    since: "कब से",
-    age: "आयु",
-    guardian: "अभिभावक",
-    fee: "शुल्क",
-    paidFee: "प्राप्त",
-    learning: "सीख रहे हैं",
-    paused: "रुका हुआ",
-    courseDone: "पाठ्यक्रम पूर्ण",
-    newTrainee: "नया नाम",
-    phones: "नंबर",
-    whatsapp: "व्हाट्सऐप (देश कोड के साथ)",
+    phones: "नंबर और संपर्क",
+    whatsapp: "WhatsApp (देश कोड के साथ)",
     main: "मुख्य नंबर",
     booking: "बुकिंग नंबर",
-    extra: "दूसरा नंबर",
+    mail: "ईमेल",
+    hoursHi: "समय, हिन्दी",
+    hoursEn: "समय, English",
+    social: "फेसबुक / इंस्टाग्राम लिंक",
     slots: "समय",
     starts: "से",
     ends: "तक",
@@ -104,6 +89,9 @@ const TEXT = {
     tagNeeded: "टैग नंबर लिखें।",
     duplicate: "यह टैग पहले से है।",
     photoBig: "फ़ोटो बड़ी है। छोटी फ़ोटो चुनें।",
+    confirmReq: "पुष्ट करें",
+    cancelReq: "रद्द करें",
+    bookedDays: "बुक तिथियाँ",
   },
   en: {
     loginTitle: "Studio desk",
@@ -115,16 +103,15 @@ const TEXT = {
     logout: "Sign out",
     overview: "Overview",
     calendar: "Calendar",
-    services: "Services",
-    lehenga: "Lehengas",
-    gifts: "Gifts",
-    academy: "Training",
+    packages: "Packages",
+    lehenga: "Lehenga",
     settings: "Settings",
-    pending: "Requests",
+    pending: "Bridal requests",
     today: "Today",
     wardrobe: "Booked lehengas",
-    learners: "Learning",
-    upcoming: "Coming appointments",
+    lehRequests: "Lehenga requests",
+    upcomingBridal: "Coming bridal bookings",
+    upcomingLehenga: "Coming lehenga requests",
     none: "Nothing here yet.",
     closeDay: "Close open times",
     openDay: "Reopen closed times",
@@ -134,7 +121,7 @@ const TEXT = {
     phone: "Mobile",
     note: "Note",
     amount: "Amount",
-    service: "Service",
+    service: "Package",
     forWhom: "For",
     status: "Status",
     paid: "Payment",
@@ -155,8 +142,6 @@ const TEXT = {
     taken: "That time is already taken.",
     saved: "Saved.",
     failed: "Could not save.",
-    bridal: "Bridal",
-    salon: "Salon",
     price: "Fee (blank means consultation)",
     active: "Show",
     add: "Add",
@@ -164,10 +149,11 @@ const TEXT = {
     nameEn: "Name, English",
     noteHi: "Detail, Hindi",
     noteEn: "Detail, English",
-    group: "Group",
-    newService: "New service",
+    newPackage: "New package",
     tag: "Tag number",
     photo: "Photo",
+    video: "Video",
+    removeVideo: "Remove video",
     title: "Name",
     client: "Client",
     clientPhone: "Client mobile",
@@ -179,27 +165,14 @@ const TEXT = {
     send: "Send on WhatsApp",
     remove: "Remove",
     newLehenga: "New lehenga",
-    newBook: "New notebook",
-    product: "Item",
-    total: "Total",
-    used: "Used",
-    left: "Left",
-    low: "Running low",
-    course: "Course",
-    since: "Since",
-    age: "Age",
-    guardian: "Guardian",
-    fee: "Fee",
-    paidFee: "Received",
-    learning: "Learning",
-    paused: "Paused",
-    courseDone: "Course complete",
-    newTrainee: "New name",
-    phones: "Numbers",
+    phones: "Numbers and contact",
     whatsapp: "WhatsApp, with country code",
     main: "Main number",
     booking: "Booking number",
-    extra: "Second number",
+    mail: "Email",
+    hoursHi: "Hours, Hindi",
+    hoursEn: "Hours, English",
+    social: "Facebook / Instagram link",
     slots: "Times",
     starts: "From",
     ends: "To",
@@ -210,10 +183,12 @@ const TEXT = {
     tagNeeded: "Add a tag number.",
     duplicate: "That tag is already used.",
     photoBig: "That photo is too large. Choose a smaller one.",
+    confirmReq: "Confirm",
+    cancelReq: "Cancel",
+    bookedDays: "Booked dates",
   },
 }
 
-const GROUPS = ["bridal", "thread", "wax", "skin", "hair", "hands", "style"]
 const db = window.supabase.createClient(window.STUDIO.url, window.STUDIO.key)
 let lang = "hi"
 let view = "overview"
@@ -226,10 +201,7 @@ let bookings = []
 let horizon = []
 let blocks = []
 let lehengas = []
-let giftBooks = []
-let giftLines = []
-let trainees = []
-let activeBook = null
+let lehRequests = []
 
 const $ = (sel) => document.querySelector(sel)
 const a = (key) => TEXT[lang][key] || key
@@ -257,6 +229,10 @@ function serviceName(id) {
   const service = services.find((item) => item.id === id)
   if (!service) return id
   return lang === "hi" ? service.name_hi : service.name_en
+}
+function lehengaTag(id) {
+  const item = lehengas.find((row) => row.id === id)
+  return item ? `#${item.tag_no}${item.title ? ` ${item.title}` : ""}` : id
 }
 function slotName(id) {
   const slot = slots.find((item) => item.id === id)
@@ -298,24 +274,18 @@ function paintLogin() {
 }
 
 async function loadCore() {
-  const [serviceRes, slotRes, settingRes, lehengaRes, bookRes, lineRes, traineeRes] = await Promise.all([
-    db.from("services").select("*").order("sort_order"),
+  const [serviceRes, slotRes, settingRes, lehengaRes, reqRes] = await Promise.all([
+    db.from("services").select("*").eq("category", "bridal").order("sort_order"),
     db.from("time_slots").select("*").order("sort_order"),
     db.from("studio_settings").select("*").limit(1),
     db.from("lehengas").select("*").order("tag_no"),
-    db.from("gift_books").select("*").order("created_at", { ascending: false }),
-    db.from("gift_lines").select("*"),
-    db.from("trainees").select("*").order("started_on", { ascending: false }),
+    db.from("lehenga_requests").select("*").order("event_date", { ascending: true }),
   ])
   services = serviceRes.data || []
   slots = slotRes.data || []
   settings = settingRes.data?.[0] || {}
   lehengas = lehengaRes.data || []
-  giftBooks = bookRes.data || []
-  giftLines = lineRes.data || []
-  trainees = traineeRes.data || []
-  if (!activeBook && giftBooks[0]) activeBook = giftBooks[0].id
-  if (activeBook && !giftBooks.some((book) => book.id === activeBook)) activeBook = giftBooks[0]?.id || null
+  lehRequests = reqRes.data || []
   await loadMonth()
 }
 
@@ -338,7 +308,7 @@ async function loadMonth() {
 function renderTabs() {
   const tabs = $("#tabs")
   tabs.replaceChildren()
-  ;["overview", "calendar", "services", "lehenga", "gifts", "academy", "settings"].forEach((id) => {
+  ;["overview", "calendar", "packages", "lehenga", "settings"].forEach((id) => {
     const button = document.createElement("button")
     button.type = "button"
     button.className = "quiet" + (view === id ? " is-on" : "")
@@ -357,10 +327,8 @@ function render() {
   const root = $("#view")
   if (view === "overview") root.innerHTML = overviewHtml()
   if (view === "calendar") root.innerHTML = calendarHtml()
-  if (view === "services") root.innerHTML = servicesHtml()
+  if (view === "packages") root.innerHTML = packagesHtml()
   if (view === "lehenga") root.innerHTML = lehengaHtml()
-  if (view === "gifts") root.innerHTML = giftsHtml()
-  if (view === "academy") root.innerHTML = academyHtml()
   if (view === "settings") root.innerHTML = settingsHtml()
 }
 
@@ -369,29 +337,28 @@ function overviewHtml() {
   const pending = horizon.filter((item) => item.status === "requested").length
   const todayCount = horizon.filter((item) => item.event_date === today && item.status !== "cancelled").length
   const wardrobe = lehengas.filter((item) => item.status === "booked" || item.status === "hold").length
-  const learners = trainees.filter((item) => item.status === "learning").length
-  const low = giftLines.filter((line) => line.total_qty - line.used_qty <= 1 && line.total_qty > 0)
+  const openReq = lehRequests.filter((item) => item.status === "requested").length
   const upcoming = horizon
     .filter((item) => item.event_date >= today && item.status !== "cancelled")
     .sort((left, right) => left.event_date.localeCompare(right.event_date))
+    .slice(0, 8)
+  const upcomingLeh = lehRequests
+    .filter((item) => item.event_date >= today && item.status !== "cancelled")
     .slice(0, 8)
   return `
     <section class="stats">
       <article class="stat"><b>${pending}</b><span>${esc(a("pending"))}</span></article>
       <article class="stat"><b>${todayCount}</b><span>${esc(a("today"))}</span></article>
       <article class="stat"><b>${wardrobe}</b><span>${esc(a("wardrobe"))}</span></article>
-      <article class="stat"><b>${learners}</b><span>${esc(a("learners"))}</span></article>
+      <article class="stat"><b>${openReq}</b><span>${esc(a("lehRequests"))}</span></article>
     </section>
     <section>
-      <h2>${esc(a("upcoming"))}</h2>
+      <h2>${esc(a("upcomingBridal"))}</h2>
       ${upcoming.length ? `<ul class="list">${upcoming.map((item) => `<li class="row"><header><strong>${esc(item.customer_name)}</strong><span class="badge">${esc(a(item.status))}</span></header><p class="muted">${esc(item.event_date)} · ${esc(slotName(item.slot))} · ${esc(serviceName(item.service_id))}</p></li>`).join("")}</ul>` : `<p class="muted">${esc(a("none"))}</p>`}
     </section>
     <section>
-      <h2>${esc(a("low"))}</h2>
-      ${low.length ? `<ul class="list">${low.map((line) => {
-        const book = giftBooks.find((item) => item.id === line.book_id)
-        return `<li class="row"><strong>${esc(line.product_name)}</strong><p class="muted">${esc(book?.client_name || "")} · ${esc(a("left"))} ${line.total_qty - line.used_qty}</p></li>`
-      }).join("")}</ul>` : `<p class="muted">${esc(a("none"))}</p>`}
+      <h2>${esc(a("upcomingLehenga"))}</h2>
+      ${upcomingLeh.length ? `<ul class="list">${upcomingLeh.map((item) => `<li class="row"><header><strong>${esc(item.customer_name)} · ${esc(item.phone)}</strong><span class="badge">${esc(a(item.status))}</span></header><p class="muted">${esc(lehengaTag(item.lehenga_id))} · ${esc(item.event_date)}</p></li>`).join("")}</ul>` : `<p class="muted">${esc(a("none"))}</p>`}
     </section>
   `
 }
@@ -406,10 +373,12 @@ function calendarHtml() {
   for (let day = 1; day <= count; day += 1) {
     const date = iso(new Date(cursor.getFullYear(), cursor.getMonth(), day))
     const has = bookings.some((item) => item.event_date === date && item.status !== "cancelled")
+      || lehRequests.some((item) => item.event_date === date && item.status !== "cancelled")
     cells += `<button type="button" class="day${date === selected ? " is-on" : ""}${has ? " has-book" : ""}" data-act="pick-day" data-date="${date}">${day}</button>`
   }
   const dayBookings = bookings.filter((item) => item.event_date === selected)
   const dayBlocks = blocks.filter((item) => item.event_date === selected)
+  const dayLeh = lehRequests.filter((item) => item.event_date === selected)
   const options = services.map((service) => `<option value="${esc(service.id)}">${esc(lang === "hi" ? service.name_hi : service.name_en)}</option>`).join("")
   const slotCards = slots.filter((slot) => slot.active).map((slot) => {
     const booking = dayBookings.find((item) => item.slot === slot.id && item.status !== "cancelled")
@@ -435,6 +404,9 @@ function calendarHtml() {
     }
     return `<article class="slot-card"><header class="split"><strong>${esc(slotName(slot.id))}</strong><span class="badge">${esc(a("free"))}</span></header><button class="quiet" type="button" data-act="block" data-slot="${esc(slot.id)}">${esc(a("block"))}</button></article>`
   }).join("")
+  const lehRows = dayLeh.length
+    ? `<ul class="list">${dayLeh.map((item) => `<li class="row"><header><strong>${esc(item.customer_name)} · ${esc(item.phone)}</strong><span class="badge">${esc(a(item.status))}</span></header><p class="muted">${esc(lehengaTag(item.lehenga_id))}${item.note ? ` · ${esc(item.note)}` : ""}</p><div class="actions"><button class="quiet" type="button" data-act="confirm-req" data-id="${esc(item.id)}">${esc(a("confirmReq"))}</button><button class="danger" type="button" data-act="cancel-req" data-id="${esc(item.id)}">${esc(a("cancelReq"))}</button></div></li>`).join("")}</ul>`
+    : `<p class="muted">${esc(a("none"))}</p>`
   return `
     <div class="cal-layout grid-2">
       <section>
@@ -453,6 +425,8 @@ function calendarHtml() {
       <section>
         <h2>${esc(selected)}</h2>
         <div class="list">${slotCards}</div>
+        <h2>${esc(a("lehRequests"))}</h2>
+        ${lehRows}
         <form data-form="walkin" class="editor">
           <h3>${esc(a("walkin"))}</h3>
           <label>${esc(a("service"))}<select name="service_id" required>${options}</select></label>
@@ -470,36 +444,50 @@ function calendarHtml() {
   `
 }
 
-function serviceForm(service) {
+function packageForm(service) {
   const id = service?.id || ""
   return `<form class="editor" data-form="${service ? "service-edit" : "service-new"}" ${service ? `data-id="${esc(id)}"` : ""}>
-    ${service ? "" : `<h3>${esc(a("newService"))}</h3>`}
+    ${service ? "" : `<h3>${esc(a("newPackage"))}</h3>`}
     <div class="grid-2">
       <label>${esc(a("nameHi"))}<input name="name_hi" required value="${esc(service?.name_hi || "")}" /></label>
       <label>${esc(a("nameEn"))}<input name="name_en" required value="${esc(service?.name_en || "")}" /></label>
       <label>${esc(a("noteHi"))}<input name="note_hi" value="${esc(service?.note_hi || "")}" /></label>
       <label>${esc(a("noteEn"))}<input name="note_en" value="${esc(service?.note_en || "")}" /></label>
       <label>${esc(a("price"))}<input name="price_inr" type="number" min="0" value="${service?.price_inr ?? ""}" /></label>
-      <label>${esc(a("group"))}<select name="group_key">${GROUPS.map((group) => `<option value="${group}"${service?.group_key === group ? " selected" : ""}>${esc(group)}</option>`).join("")}</select></label>
-      <label>${esc(a("bridal"))} / ${esc(a("salon"))}<select name="category"><option value="bridal"${service?.category === "bridal" ? " selected" : ""}>${esc(a("bridal"))}</option><option value="salon"${service?.category !== "bridal" ? " selected" : ""}>${esc(a("salon"))}</option></select></label>
       <label><input name="active" type="checkbox" ${service?.active !== false ? "checked" : ""}/> ${esc(a("active"))}</label>
     </div>
     <button class="gold" type="submit">${esc(a("save"))}</button>
   </form>`
 }
 
-function servicesHtml() {
-  const bridal = services.filter((item) => item.category === "bridal").map(serviceForm).join("")
-  const salon = services.filter((item) => item.category === "salon").map(serviceForm).join("")
-  return `<h2>${esc(a("bridal"))}</h2>${bridal}<h2>${esc(a("salon"))}</h2>${salon}${serviceForm(null)}`
+function packagesHtml() {
+  const forms = services.map(packageForm).join("")
+  return `${forms}${packageForm(null)}`
+}
+
+function lehMediaTag(item) {
+  if (item.video_url) return `<video src="${esc(item.video_url)}" controls preload="metadata" playsinline></video>`
+  if (item.photo && (item.photo.startsWith("http") || item.photo.startsWith("data:image/"))) return `<img src="${item.photo.startsWith("data:") ? item.photo : esc(item.photo)}" alt="" />`
+  return ""
 }
 
 function lehengaHtml() {
+  const month = cursor
+  const days = []
+  for (let day = 1; day <= new Date(month.getFullYear(), month.getMonth() + 1, 0).getDate(); day += 1) {
+    const date = iso(new Date(month.getFullYear(), month.getMonth(), day))
+    const tags = lehengas.filter((item) => item.event_date === date && (item.status === "booked" || item.status === "hold")).map((item) => item.tag_no)
+    const reqs = lehRequests.filter((item) => item.event_date === date && item.status !== "cancelled").length
+    if (tags.length || reqs) days.push(`<li class="row"><strong>${esc(date)}</strong><p class="muted">${esc(a("bookedDays"))}: ${esc(tags.join(", ") || "—")} · ${esc(a("lehRequests"))}: ${reqs}</p></li>`)
+  }
   const cards = lehengas.map((item) => {
-    const src = typeof item.photo === "string" && item.photo.startsWith("data:image/") ? item.photo : ""
+    const reqs = lehRequests.filter((row) => row.lehenga_id === item.id && row.status !== "cancelled")
+    const reqRows = reqs.length
+      ? `<ul class="list">${reqs.map((row) => `<li class="row"><header><strong>${esc(row.customer_name)} · ${esc(row.phone)}</strong><span class="badge">${esc(a(row.status))}</span></header><p class="muted">${esc(row.event_date)}${row.note ? ` · ${esc(row.note)}` : ""}</p><div class="actions">${row.status === "requested" ? `<button class="quiet" type="button" data-act="confirm-req" data-id="${esc(row.id)}">${esc(a("confirmReq"))}</button>` : ""}<button class="danger" type="button" data-act="cancel-req" data-id="${esc(row.id)}">${esc(a("cancelReq"))}</button></div></li>`).join("")}</ul>`
+      : ""
     return `<article class="editor lehenga">
-      ${src ? `<img src="${src}" alt="" />` : ""}
-      <p class="tag">${esc(item.tag_no)}</p>
+      ${lehMediaTag(item)}
+      <p class="tag">#${esc(item.tag_no)}</p>
       <form data-form="lehenga-edit" data-id="${esc(item.id)}">
         <label>${esc(a("title"))}<input name="title" value="${esc(item.title)}" /></label>
         <label>${esc(a("status"))}<select name="status">${["available", "booked", "hold", "returned"].map((status) => `<option value="${status}"${item.status === status ? " selected" : ""}>${esc(a(status))}</option>`).join("")}</select></label>
@@ -510,12 +498,15 @@ function lehengaHtml() {
         <label>${esc(a("amount"))}<input name="amount_inr" type="number" min="0" value="${item.amount_inr ?? ""}" /></label>
         <label>${esc(a("note"))}<textarea name="note">${esc(item.note)}</textarea></label>
         <label>${esc(a("photo"))}<input name="photo" type="file" accept="image/*" /></label>
+        <label>${esc(a("video"))}<input name="video" type="file" accept="video/*" /></label>
         <div class="actions">
           <button class="gold" type="submit">${esc(a("save"))}</button>
+          ${item.video_url ? `<button class="quiet" type="button" data-act="remove-video" data-id="${esc(item.id)}">${esc(a("removeVideo"))}</button>` : ""}
           <button class="quiet" type="button" data-act="wa-lehenga" data-id="${esc(item.id)}">${esc(a("send"))}</button>
           <button class="danger" type="button" data-act="delete-lehenga" data-id="${esc(item.id)}">${esc(a("remove"))}</button>
         </div>
       </form>
+      ${reqRows}
     </article>`
   }).join("")
   return `
@@ -524,96 +515,14 @@ function lehengaHtml() {
       <label>${esc(a("tag"))}<input name="tag_no" required /></label>
       <label>${esc(a("title"))}<input name="title" /></label>
       <label>${esc(a("photo"))}<input name="photo" type="file" accept="image/*" /></label>
+      <label>${esc(a("video"))}<input name="video" type="file" accept="video/*" /></label>
       <button class="gold" type="submit">${esc(a("add"))}</button>
     </form>
+    <section>
+      <h2>${esc(a("bookedDays"))} · ${esc(new Intl.DateTimeFormat(lang === "hi" ? "hi-IN" : "en-IN", { month: "long", year: "numeric" }).format(cursor))}</h2>
+      ${days.length ? `<ul class="list">${days.join("")}</ul>` : `<p class="muted">${esc(a("none"))}</p>`}
+    </section>
     <div class="lehenga-grid">${cards || `<p class="muted">${esc(a("none"))}</p>`}</div>
-  `
-}
-
-function giftsHtml() {
-  const book = giftBooks.find((item) => item.id === activeBook)
-  const lines = giftLines.filter((line) => line.book_id === activeBook)
-  const tabs = giftBooks.map((item) => `<button type="button" class="quiet${item.id === activeBook ? " is-on" : ""}" data-act="open-book" data-id="${esc(item.id)}">${esc(item.client_name)}</button>`).join("")
-  const rows = lines.map((line) => {
-    const left = line.total_qty - line.used_qty
-    return `<form class="line" data-form="gift-line" data-id="${esc(line.id)}">
-      <input name="product_name" value="${esc(line.product_name)}" required />
-      <input name="total_qty" type="number" min="0" value="${line.total_qty}" aria-label="${esc(a("total"))}" />
-      <input name="used_qty" type="number" min="0" max="${line.total_qty}" value="${line.used_qty}" aria-label="${esc(a("used"))}" />
-      <strong>${left}</strong>
-      <button class="quiet" type="submit">${esc(a("save"))}</button>
-    </form>`
-  }).join("")
-  return `
-    <form class="editor" data-form="gift-book">
-      <h2>${esc(a("newBook"))}</h2>
-      <label>${esc(a("client"))}<input name="client_name" required /></label>
-      <label>${esc(a("event"))}<input name="event_date" type="date" /></label>
-      <label>${esc(a("note"))}<input name="note" /></label>
-      <button class="gold" type="submit">${esc(a("add"))}</button>
-    </form>
-    <div class="books">${tabs}</div>
-    ${book ? `<section class="paper">
-      <h2>${esc(book.client_name)}</h2>
-      <p>${esc(book.event_date || "")} ${esc(book.note || "")}</p>
-      <p class="muted">${esc(a("product"))} · ${esc(a("total"))} · ${esc(a("used"))} · ${esc(a("left"))}</p>
-      ${rows || `<p>${esc(a("none"))}</p>`}
-      <form data-form="gift-new" data-id="${esc(book.id)}" class="line">
-        <input name="product_name" placeholder="${esc(a("product"))}" required />
-        <input name="total_qty" type="number" min="0" value="1" aria-label="${esc(a("total"))}" />
-        <input name="used_qty" type="number" min="0" value="0" aria-label="${esc(a("used"))}" />
-        <span></span>
-        <button class="gold" type="submit">${esc(a("add"))}</button>
-      </form>
-      <button class="danger" type="button" data-act="delete-book" data-id="${esc(book.id)}">${esc(a("remove"))}</button>
-    </section>` : `<p class="muted">${esc(a("none"))}</p>`}
-  `
-}
-
-function academyHtml() {
-  const cards = trainees.map((item) => `<form class="editor" data-form="trainee-edit" data-id="${esc(item.id)}">
-    <div class="grid-2">
-      <label>${esc(a("name"))}<input name="full_name" required value="${esc(item.full_name)}" /></label>
-      <label>${esc(a("age"))}<input name="age" type="number" min="5" max="80" value="${item.age ?? ""}" /></label>
-      <label>${esc(a("guardian"))}<input name="guardian_name" value="${esc(item.guardian_name)}" /></label>
-      <label>${esc(a("phone"))}<input name="phone" value="${esc(item.phone)}" /></label>
-      <label>${esc(a("course"))}<input name="course" required value="${esc(item.course)}" list="courses" /></label>
-      <label>${esc(a("since"))}<input name="started_on" type="date" required value="${esc(item.started_on)}" /></label>
-      <label>${esc(a("status"))}<select name="status">
-        <option value="learning"${item.status === "learning" ? " selected" : ""}>${esc(a("learning"))}</option>
-        <option value="paused"${item.status === "paused" ? " selected" : ""}>${esc(a("paused"))}</option>
-        <option value="completed"${item.status === "completed" ? " selected" : ""}>${esc(a("courseDone"))}</option>
-      </select></label>
-      <label>${esc(a("fee"))}<input name="fee_inr" type="number" min="0" value="${item.fee_inr}" /></label>
-      <label>${esc(a("paidFee"))}<input name="paid_inr" type="number" min="0" value="${item.paid_inr}" /></label>
-      <label>${esc(a("note"))}<input name="note" value="${esc(item.note)}" /></label>
-    </div>
-    <div class="actions"><button class="gold" type="submit">${esc(a("save"))}</button><button class="danger" type="button" data-act="delete-trainee" data-id="${esc(item.id)}">${esc(a("remove"))}</button></div>
-  </form>`).join("")
-  return `
-    <datalist id="courses">
-      <option value="बेसिक मेकअप"></option>
-      <option value="ब्राइडल मेकअप"></option>
-      <option value="हेयर स्टाइलिंग"></option>
-      <option value="त्वचा देखभाल"></option>
-      <option value="पूर्ण पाठ्यक्रम"></option>
-    </datalist>
-    <form class="editor" data-form="trainee-new">
-      <h2>${esc(a("newTrainee"))}</h2>
-      <div class="grid-2">
-        <label>${esc(a("name"))}<input name="full_name" required /></label>
-        <label>${esc(a("age"))}<input name="age" type="number" min="5" max="80" /></label>
-        <label>${esc(a("guardian"))}<input name="guardian_name" /></label>
-        <label>${esc(a("phone"))}<input name="phone" /></label>
-        <label>${esc(a("course"))}<input name="course" required list="courses" /></label>
-        <label>${esc(a("since"))}<input name="started_on" type="date" required value="${iso(new Date())}" /></label>
-        <label>${esc(a("fee"))}<input name="fee_inr" type="number" min="0" value="0" /></label>
-        <label>${esc(a("paidFee"))}<input name="paid_inr" type="number" min="0" value="0" /></label>
-        <label>${esc(a("note"))}<input name="note" /></label>
-      </div>
-      <button class="gold" type="submit">${esc(a("add"))}</button>
-    </form>
-    ${cards || `<p class="muted">${esc(a("none"))}</p>`}
   `
 }
 
@@ -634,7 +543,10 @@ function settingsHtml() {
       <label>${esc(a("whatsapp"))}<input name="whatsapp" value="${esc(settings.whatsapp || "")}" required /></label>
       <label>${esc(a("main"))}<input name="phone_main" value="${esc(settings.phone_main || "")}" required /></label>
       <label>${esc(a("booking"))}<input name="phone_booking" value="${esc(settings.phone_booking || "")}" required /></label>
-      <label>${esc(a("extra"))}<input name="phone_extra" value="${esc(settings.phone_extra || "")}" required /></label>
+      <label>${esc(a("mail"))}<input name="email" type="email" value="${esc(settings.email || "")}" /></label>
+      <label>${esc(a("hoursHi"))}<input name="hours_hi" value="${esc(settings.hours_hi || "")}" /></label>
+      <label>${esc(a("hoursEn"))}<input name="hours_en" value="${esc(settings.hours_en || "")}" /></label>
+      <label>${esc(a("social"))}<input name="facebook" value="${esc(settings.facebook || settings.instagram || "")}" /></label>
       <button class="gold" type="submit">${esc(a("save"))}</button>
     </form>
     <h2>${esc(a("slots"))}</h2>
@@ -674,6 +586,15 @@ async function compress(file) {
   }
 }
 
+async function uploadMedia(file, tag) {
+  const clean = String(file.name || "file").replace(/[^a-zA-Z0-9._-]+/g, "_").slice(0, 60)
+  const path = `${tag || "tag"}-${Date.now()}-${clean}`
+  const { error } = await db.storage.from("lehenga-media").upload(path, file, { upsert: true, contentType: file.type })
+  if (error) throw error
+  const { data } = db.storage.from("lehenga-media").getPublicUrl(path)
+  return data.publicUrl
+}
+
 async function onSubmit(event) {
   const form = event.target
   if (!(form instanceof HTMLFormElement)) return
@@ -693,9 +614,8 @@ async function onSubmit(event) {
       const phone = data.phone.replace(/\D/g, "")
       if (!/^[6-9]\d{9}$/.test(phone)) return toast(a("failed"), true)
       if (blocks.some((item) => item.event_date === selected && item.slot === data.slot)) return toast(a("taken"), true)
-      const service = services.find((item) => item.id === data.service_id)
       const { error } = await db.from("bookings").insert({
-        category: service?.category || "salon",
+        category: "bridal",
         service_id: data.service_id,
         event_date: selected,
         slot: data.slot,
@@ -716,8 +636,8 @@ async function onSubmit(event) {
         note_hi: data.note_hi || "",
         note_en: data.note_en || "",
         price_inr: numOrNull(data.price_inr),
-        group_key: data.group_key,
-        category: data.category,
+        category: "bridal",
+        group_key: "bridal",
         active: form.querySelector('[name="active"]').checked,
         updated_at: new Date().toISOString(),
       }
@@ -728,17 +648,26 @@ async function onSubmit(event) {
       if (error) return fail(error)
     }
     if (kind === "lehenga-new" || kind === "lehenga-edit") {
+      const tag = (kind === "lehenga-new" ? data.tag_no : lehengas.find((row) => row.id === form.dataset.id)?.tag_no || "").trim()
+      if (kind === "lehenga-new" && !tag) return toast(a("tagNeeded"), true)
+      const photoFile = form.querySelector('[name="photo"]')?.files?.[0]
+      const videoFile = form.querySelector('[name="video"]')?.files?.[0]
       let photo = ""
-      const file = form.querySelector('[name="photo"]')?.files?.[0]
-      if (file) {
-        try { photo = await compress(file) } catch { return toast(a("photoBig"), true) }
+      let video_url
+      if (photoFile) {
+        try { photo = await uploadMedia(photoFile, tag) }
+        catch { try { photo = await compress(photoFile) } catch { return toast(a("photoBig"), true) } }
+      }
+      if (videoFile) {
+        try { video_url = await uploadMedia(videoFile, tag) }
+        catch { return toast(a("failed"), true) }
       }
       if (kind === "lehenga-new") {
-        if (!data.tag_no.trim()) return toast(a("tagNeeded"), true)
         const { error } = await db.from("lehengas").insert({
-          tag_no: data.tag_no.trim(),
+          tag_no: tag,
           title: data.title || "",
           photo,
+          video_url: video_url || "",
         })
         if (error) return fail(error)
       } else {
@@ -754,59 +683,21 @@ async function onSubmit(event) {
           updated_at: new Date().toISOString(),
         }
         if (photo) payload.photo = photo
+        if (video_url) payload.video_url = video_url
         const { error } = await db.from("lehengas").update(payload).eq("id", form.dataset.id)
         if (error) return fail(error)
       }
-    }
-    if (kind === "gift-book") {
-      const { data: created, error } = await db.from("gift_books").insert({
-        client_name: data.client_name.trim(),
-        event_date: data.event_date || null,
-        note: data.note || "",
-      }).select("id").single()
-      if (error) return fail(error)
-      activeBook = created.id
-    }
-    if (kind === "gift-new" || kind === "gift-line") {
-      const total = Number(data.total_qty)
-      const used = Number(data.used_qty)
-      if (used > total) return toast(a("failed"), true)
-      const payload = { product_name: data.product_name.trim(), total_qty: total, used_qty: used }
-      const query = kind === "gift-new"
-        ? db.from("gift_lines").insert({ ...payload, book_id: form.dataset.id })
-        : db.from("gift_lines").update(payload).eq("id", form.dataset.id)
-      const { error } = await query
-      if (error) return fail(error)
-    }
-    if (kind === "trainee-new" || kind === "trainee-edit") {
-      const fee = Number(data.fee_inr || 0)
-      const paid = Number(data.paid_inr || 0)
-      if (paid > fee) return toast(a("failed"), true)
-      const payload = {
-        full_name: data.full_name.trim(),
-        age: data.age ? Number(data.age) : null,
-        guardian_name: data.guardian_name || "",
-        phone: data.phone || "",
-        course: data.course.trim(),
-        started_on: data.started_on,
-        status: data.status || "learning",
-        fee_inr: fee,
-        paid_inr: paid,
-        note: data.note || "",
-        updated_at: new Date().toISOString(),
-      }
-      const query = kind === "trainee-new"
-        ? db.from("trainees").insert(payload)
-        : db.from("trainees").update(payload).eq("id", form.dataset.id)
-      const { error } = await query
-      if (error) return fail(error)
     }
     if (kind === "settings") {
       const { error } = await db.from("studio_settings").update({
         whatsapp: data.whatsapp.replace(/\D/g, ""),
         phone_main: data.phone_main.replace(/\D/g, ""),
         phone_booking: data.phone_booking.replace(/\D/g, ""),
-        phone_extra: data.phone_extra.replace(/\D/g, ""),
+        email: (data.email || "").trim(),
+        hours_hi: data.hours_hi || "",
+        hours_en: data.hours_en || "",
+        facebook: (data.facebook || "").trim(),
+        instagram: (data.facebook || "").trim(),
         updated_at: new Date().toISOString(),
       }).eq("id", 1)
       if (error) return fail(error)
@@ -879,13 +770,24 @@ async function onClick(event) {
       await loadMonth()
       render()
     }
-    if (act === "open-book") {
-      activeBook = button.dataset.id
+    if (act === "confirm-req") {
+      const { error } = await db.from("lehenga_requests").update({ status: "confirmed" }).eq("id", button.dataset.id)
+      if (error) return fail(error)
+      toast(a("saved"))
+      await loadCore()
       render()
     }
-    if (act === "delete-book") {
-      await db.from("gift_books").delete().eq("id", button.dataset.id)
-      activeBook = null
+    if (act === "cancel-req") {
+      const { error } = await db.from("lehenga_requests").update({ status: "cancelled" }).eq("id", button.dataset.id)
+      if (error) return fail(error)
+      toast(a("saved"))
+      await loadCore()
+      render()
+    }
+    if (act === "remove-video") {
+      const { error } = await db.from("lehengas").update({ video_url: "", updated_at: new Date().toISOString() }).eq("id", button.dataset.id)
+      if (error) return fail(error)
+      toast(a("saved"))
       await loadCore()
       render()
     }
@@ -894,17 +796,12 @@ async function onClick(event) {
       await loadCore()
       render()
     }
-    if (act === "delete-trainee") {
-      await db.from("trainees").delete().eq("id", button.dataset.id)
-      await loadCore()
-      render()
-    }
     if (act === "wa-lehenga") {
       const item = lehengas.find((row) => row.id === button.dataset.id)
       if (!item) return
       const paid = item.paid_status === "paid" ? a("paidFull") : a(item.paid_status)
       const lines = [
-        "Tanishq Makeover, ओराई",
+        "Sparkle Makeover, ओराई",
         "लहंगा बुकिंग",
         `टैग: ${item.tag_no}`,
         item.title ? `नाम: ${item.title}` : "",
